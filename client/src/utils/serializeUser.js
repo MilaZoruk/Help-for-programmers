@@ -1,10 +1,3 @@
-const serializeUser = (user) =>
-  user
-    ? {
-        id: user.id,
-        email: user.email,
-        ...user.user_metadata,
-      }
-    : null;
-
+const serializeUser = (data) =>
+  data.user ? { id: data.user.id, email: data.user.email } : null;
 export default serializeUser;

@@ -24,28 +24,21 @@ const get = async () => {
 };
 
 // метод для регистрации пользователя
-const register = async (data) => {
-  const { email, password, user_name } = data;
+const register = async (userData) => {
+  const { email, password } = userData;
+  console.log(email, password);
   // регистрируем пользователя
-  const { user, error } = await supabase.auth.signUp(
-    // основные/обязательные данные
-    {
-      email,
-      password,
-    },
-    // дополнительные/опциональные данные
-    {
-      data: {
-        user_name,
-      },
-    }
-  );
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+  });
+  console.log(data);
   if (error) throw error;
   // записываем пользователя в базу
   const { data: _user, error: _error } = await supabase
     .from('users')
     // сериализуем объект пользователя
-    .insert([serializeUser(user)])
+    .insert([serializeUser(data)])
     .single();
   if (_error) throw _error;
   return _user;
