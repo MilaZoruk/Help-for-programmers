@@ -117,6 +117,13 @@ const uploadAvatar = async (file) => {
   return _user;
 };
 
-const userApi = { get, register, login, logout, update, uploadAvatar };
+const userApi = {
+  get,
+  register,
+  login,
+  logout,
+  update,
+  uploadAvatar,
+};
 
 export default userApi;
