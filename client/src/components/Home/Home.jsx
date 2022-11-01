@@ -1,5 +1,15 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 export default function Home() {
-  return <div>Home</div>;
+  const { userInfo, loading } = useSelector((state) => state.user);
+  return (
+    <div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div>{userInfo ? `Hello, ${userInfo.user_name}!` : 'Welcome!'}</div>
+      )}
+    </div>
+  );
 }

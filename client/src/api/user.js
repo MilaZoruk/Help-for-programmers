@@ -9,16 +9,15 @@ const STORAGE_URL = `${
 // метод для получения данных пользователя из базы при наличии аутентифицированного пользователя
 // объект, возвращаемый методом `auth.user`, извлекается из локального хранилища
 const get = async () => {
-  const user = supabase.auth.user();
-  if (user) {
-    const { data, error } = await supabase
+  const { data } = await supabase.auth.getSession();
+  if (data.session) {
+    const { data: _userData, error } = await supabase
       .from('users')
       .select()
-      .match({ id: user.id })
+      .match({ id: data.session.user.id })
       .single();
     if (error) throw error;
-    console.log(data);
-    return data;
+    return _userData;
   }
   return null;
 };
@@ -26,13 +25,11 @@ const get = async () => {
 // метод для регистрации пользователя
 const register = async (userData) => {
   const { email, password } = userData;
-  console.log(email, password);
   // регистрируем пользователя
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
   });
-  console.log(data);
   if (error) throw error;
   // записываем пользователя в базу
   const { data: _user, error: _error } = await supabase
@@ -45,15 +42,19 @@ const register = async (userData) => {
 };
 
 // метод для авторизации пользователя
-const login = async (data) => {
+const login = async (userInput) => {
   // авторизуем пользователя
-  const { user, error } = await supabase.auth.signIn(data);
+  const { email, password } = userInput;
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
   if (error) throw error;
   // получаем данные пользователя из базы
   const { data: _user, error: _error } = await supabase
     .from('users')
     .select()
-    .match({ id: user.id })
+    .match({ id: data.user.id })
     .single();
   if (_error) throw _error;
   return _user;
