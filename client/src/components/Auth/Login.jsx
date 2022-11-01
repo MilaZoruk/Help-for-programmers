@@ -1,23 +1,22 @@
 import { React, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { loginUser } from '../../features/User/userActions';
 
-import { registerUser } from '../../features/User/userActions';
-
-export default function Register() {
+export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { loading, userData, error, success } = useSelector(
-    (state) => state.user
-  );
-
-  useEffect(() => {
-    if (success) navigate('/login');
-  }, [navigate, userData, success]);
+  const { loading, userInfo, error } = useSelector((state) => state.user);
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/');
+    }
+  }, [navigate, userInfo]);
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -30,7 +29,7 @@ export default function Register() {
       password,
     };
 
-    dispatch(registerUser(data));
+    dispatch(loginUser(data));
   };
 
   return (
@@ -93,10 +92,10 @@ export default function Register() {
               <div className="flex items-center">
                 <div className="text-sm">
                   <Link
-                    to="/login"
+                    to="/register"
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
-                    Already have an account?
+                    Do not have an account yet?
                   </Link>
                 </div>
               </div>
@@ -116,7 +115,7 @@ export default function Register() {
                 type="submit"
                 className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
-                {loading ? 'Loading...' : 'Register'}
+                {loading ? 'Loading...' : 'Login'}
               </button>
               {error && <p>{error}</p>}
             </div>
