@@ -5,6 +5,7 @@ import { RadioBrowserApi } from 'radio-browser-api';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import defaultImage from './icon-radio.png';
+import styles from './Radio.module.css';
 
 export default function Radio() {
   const [stations, setStations] = useState();
@@ -23,7 +24,7 @@ export default function Radio() {
       .searchStations({
         language: 'english',
         tag: stf,
-        limit: 30,
+        limit: 15,
       })
       .then((data) => data);
 
@@ -49,8 +50,8 @@ export default function Radio() {
   };
 
   return (
-    <div className="radio">
-      <div className="filters">
+    <div className={styles.radio}>
+      <div className={styles.filters}>
         {filters.map((filter, index) => (
           <span
             key={index}
@@ -61,22 +62,22 @@ export default function Radio() {
           </span>
         ))}
       </div>
-      <div className="stations">
+      <div className={styles.stations}>
         {stations &&
           stations.map((station, index) => (
-            <div className="station" key={index}>
-              <div className="stationName">
+            <div className={styles.station} key={index}>
+              <div className={styles.stationName}>
                 <img
-                  className="logo"
+                  className={styles.logo}
                   src={station.favicon}
                   alt="station logo"
                   onError={setDefaultSrc}
                 />
-                <div className="name">{station.name}</div>
+                <div className={styles.name}>{station.name}</div>
               </div>
 
               <AudioPlayer
-                className="player"
+                className={styles.player}
                 src={station.urlResolved}
                 showJumpControls={false}
                 layout="stacked"
