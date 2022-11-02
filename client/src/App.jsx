@@ -14,6 +14,7 @@ import Login from './components/Auth/Login';
 import Home from './components/Home/Home';
 import Profile from './components/Profile/Profile';
 import ProfileSettings from './components/Profile/ProfileSettings';
+import Room from './components/Room/Room';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App() {
       <Routes>
         <Route path="/articles" element={<Articles />} />
         <Route path="/article" element={<Article />} />
+        <Route path="/relaxroom" element={<Room />} />
         <Route path="" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
