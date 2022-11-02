@@ -4,13 +4,14 @@ import {
   registerUser,
   getUserDetails,
   logoutUser,
+  uploadNewAvatar,
+  updateUserInfo,
 } from './userActions';
 
 const initialState = {
   loading: false,
   userInfo: null,
   error: null,
-  success: false,
 };
 
 export const userSlice = createSlice({
@@ -25,7 +26,6 @@ export const userSlice = createSlice({
     },
     [registerUser.fulfilled]: (state) => {
       state.loading = false;
-      state.success = true;
     },
     [registerUser.rejected]: (state, { payload }) => {
       state.loading = false;
@@ -64,9 +64,35 @@ export const userSlice = createSlice({
       state.loading = false;
       state.userInfo = null;
       state.error = null;
-      state.success = false;
     },
     [logoutUser.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
+    // update Avatar
+    [uploadNewAvatar.pending]: (state) => {
+      state.loading = true;
+    },
+    [uploadNewAvatar.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.userInfo.avatar_url = payload;
+    },
+    [uploadNewAvatar.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
+    // update userInfo
+    [updateUserInfo.pending]: (state) => {
+      state.loading = true;
+    },
+    [updateUserInfo.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.userInfo = {
+        ...state.userInfo,
+        ...payload,
+      };
+    },
+    [updateUserInfo.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
     },

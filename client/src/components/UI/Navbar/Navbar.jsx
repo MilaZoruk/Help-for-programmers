@@ -107,15 +107,15 @@ export default function Navbar() {
                             </Menu.Item>
                             <Menu.Item>
                               {({ active }) => (
-                                <a
-                                  href="/settings"
+                                <Link
+                                  to="/profile-settings"
                                   className={classNames(
                                     active ? 'bg-gray-100' : '',
                                     'block px-4 py-2 text-sm text-gray-700'
                                   )}
                                 >
                                   Settings
-                                </a>
+                                </Link>
                               )}
                             </Menu.Item>
                             <Menu.Item>
@@ -139,7 +139,7 @@ export default function Navbar() {
                       <>
                         <Link to="login">
                           <Disclosure.Button
-                            as="a"
+                            as="button"
                             className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                           >
                             Login
@@ -147,7 +147,7 @@ export default function Navbar() {
                         </Link>
                         <Link to="register">
                           <Disclosure.Button
-                            as="a"
+                            as="button"
                             className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                           >
                             Register
@@ -230,13 +230,14 @@ export default function Navbar() {
                     >
                       Your Profile
                     </Disclosure.Button>
-                    <Disclosure.Button
-                      as="a"
-                      href="#"
-                      className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                    >
-                      Settings
-                    </Disclosure.Button>
+                    <Link to="/profile-settings">
+                      <Disclosure.Button
+                        as="button"
+                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                      >
+                        Settings
+                      </Disclosure.Button>
+                    </Link>
                     <Disclosure.Button
                       as="button"
                       onClick={logoutHandler}

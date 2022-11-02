@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="w-full p-4 md:p-8 lg:p-10 bg-gray-800">
       <div className="mx-auto max-w-screen-xl text-center">
         <a
-          href="#"
+          href="/something"
           className="flex justify-center items-center text-2xl font-semibold text-white"
         >
           <svg
@@ -157,44 +157,44 @@ export default function Footer() {
         <p className="my-6 text-gray-400">Chillax, bro!</p>
         <ul className="flex flex-wrap justify-center items-center mb-6 text-white">
           <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6 ">
+            <a href="/something" className="mr-4 hover:underline md:mr-6 ">
               About
             </a>
           </li>
           <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6">
+            <a href="/something" className="mr-4 hover:underline md:mr-6">
               Premium
             </a>
           </li>
           <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6 ">
+            <a href="/something" className="mr-4 hover:underline md:mr-6 ">
               Campaigns
             </a>
           </li>
           <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6">
+            <a href="/something" className="mr-4 hover:underline md:mr-6">
               Blog
             </a>
           </li>
           <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6">
+            <a href="/something" className="mr-4 hover:underline md:mr-6">
               Affiliate Program
             </a>
           </li>
           <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6">
+            <a href="/something" className="mr-4 hover:underline md:mr-6">
               FAQs
             </a>
           </li>
           <li>
-            <a href="#" className="mr-4 hover:underline md:mr-6">
+            <a href="/something" className="mr-4 hover:underline md:mr-6">
               Contact
             </a>
           </li>
         </ul>
         <span className="text-sm sm:text-center text-gray-400">
           © 2022{' '}
-          <a href="#" className="hover:underline">
+          <a href="/something" className="hover:underline">
             Flowbite™
           </a>
           . All Rights Reserved.
