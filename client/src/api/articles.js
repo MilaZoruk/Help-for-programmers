@@ -5,7 +5,7 @@ import { supabase } from '../supabase/supabaseClient';
 //   return posts;
 // }
 
-export default async function getOnePost(id) {
+export default async function getCategoryArticles(id) {
   const { data: posts, error } = await supabase
     .from('posts')
     .select('*')

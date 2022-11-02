@@ -1,43 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import getOnePost from '../../api/articles';
-
+import { Link, useParams } from 'react-router-dom';
 import {
   BoltIcon,
   ChatBubbleBottomCenterTextIcon,
   GlobeAltIcon,
   ScaleIcon,
 } from '@heroicons/react/24/outline';
+import getCategoryArticles from '../../api/articles';
 
-const features = [
-  {
-    name: 'Твой код никого не интересует',
-    description: ' И это правда',
-    icon: GlobeAltIcon,
-  },
-  {
-    name: 'Следующая статья',
-    description: 'бла бла',
-    icon: ScaleIcon,
-  },
-  {
-    name: 'Название статьи',
-    description: 'Тру-ля ля',
-    icon: BoltIcon,
-  },
-  {
-    name: 'Еще одна',
-    description: 'Очень много текста',
-    icon: ChatBubbleBottomCenterTextIcon,
-  },
-];
+export default function Category() {
+  const [articles, setArticles] = useState([]);
 
-export default function Example() {
   const { id } = useParams();
 
   useEffect(() => {
-    getOnePost(id).then((posts) => {
-      console.log(posts);
+    getCategoryArticles(id).then((data) => {
+      console.log(data);
+      setArticles(data);
     });
   }, [id]);
 
@@ -58,18 +37,22 @@ export default function Example() {
 
         <div className="mt-10">
           <dl className="space-y-10 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10 md:space-y-0">
-            {features.map((feature) => (
-              <div key={feature.name} className="relative">
+            {articles.map((article) => (
+              <div key={article.id} className="relative">
                 <dt>
                   <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
-                    <feature.icon className="h-6 w-6" aria-hidden="true" />
+                    {/* <article.icon className="h-6 w-6" aria-hidden="true" /> */}
                   </div>
                   <p className="ml-16 text-lg font-medium leading-6 text-gray-900">
-                    {feature.name}
+                    <dd>{article.title}</dd>
                   </p>
                 </dt>
                 <dd className="mt-2 ml-16 text-base text-gray-500">
-                  {feature.description}
+                  {article.content}
+                  <a href={article.link} target="_blank" rel="noreferrer">
+                    {' '}
+                    ...читать далее
+                  </a>
                 </dd>
               </div>
             ))}

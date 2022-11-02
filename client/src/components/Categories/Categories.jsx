@@ -78,7 +78,7 @@ const callouts = [
   },
 ];
 
-export default function Example() {
+export default function Categories() {
 
   return (
     <div className="bg-gray-100">
@@ -97,7 +97,7 @@ export default function Example() {
                   />
                 </div>
                 <h3 className="mt-6 text-sm text-gray-500">
-                  <Link to={`/article/${callout.id}`}>
+                  <Link to={`/categories/${callout.id}`}>
                     <span className="absolute inset-0" />
                     {callout.name}
                   </Link>
