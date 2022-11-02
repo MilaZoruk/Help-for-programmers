@@ -17,6 +17,9 @@ import Profile from './components/Profile/Profile';
 import ProfileSettings from './components/Profile/ProfileSettings';
 import AdminDashboard from './components/Admin/AdminDashboard';
 import Room from './components/Room/Room';
+
+import MagicSphere from './components/MagisSphere/MagicSphere';
+
 import ResetPassword from './components/Profile/ResetPassword';
 
 function App() {
@@ -46,6 +49,7 @@ function App() {
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Route>
       </Routes>
+      <MagicSphere />
       <Footer />
     </section>
   );
