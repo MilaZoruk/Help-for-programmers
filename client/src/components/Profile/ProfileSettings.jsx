@@ -18,6 +18,7 @@ export default function ProfileSettings() {
   const [firstName, setFirstName] = useState(userInfo.first_name);
   const [lastName, setLastName] = useState(userInfo.last_name);
   const [userName, setUserName] = useState(userInfo.user_name);
+  const [age, setAge] = useState(userInfo.age);
   const [bio, setBio] = useState(userInfo.bio);
   const [email, setEmail] = useState(userInfo.email);
   const [phoneNumber, setPhoneNumber] = useState(userInfo.phone_number);
@@ -33,6 +34,7 @@ export default function ProfileSettings() {
       first_name: firstName,
       last_name: lastName,
       user_name: userName,
+      age,
       bio,
       email,
       phone_number: phoneNumber,
@@ -72,9 +74,6 @@ export default function ProfileSettings() {
                     >
                       <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
                         <div className="sm:col-span-6">
-                          <h2 className="text-xl font-medium text-blue-gray-900">
-                            Profile
-                          </h2>
                           <p className="mt-1 text-sm text-blue-gray-500">
                             This information will be displayed publicly so be
                             careful what you share.
@@ -117,7 +116,7 @@ export default function ProfileSettings() {
                           />
                         </div>
 
-                        <div className="sm:col-span-6">
+                        <div className="sm:col-span-3">
                           <label
                             htmlFor="username"
                             className="block text-sm font-medium text-blue-gray-900"
@@ -132,6 +131,25 @@ export default function ProfileSettings() {
                               onChange={(e) => setUserName(e.target.value)}
                               value={userName}
                               autoComplete="username"
+                              className="mt-1 block w-full rounded-md border-blue-gray-300 text-blue-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="sm:col-span-3">
+                          <label
+                            htmlFor="age"
+                            className="block text-sm font-medium text-blue-gray-900"
+                          >
+                            Age
+                          </label>
+                          <div className="mt-1 flex rounded-md shadow-sm">
+                            <input
+                              type="number"
+                              name="age"
+                              id="age"
+                              onChange={(e) => setAge(e.target.value)}
+                              value={age}
                               className="mt-1 block w-full rounded-md border-blue-gray-300 text-blue-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                             />
                           </div>
@@ -242,7 +260,6 @@ export default function ProfileSettings() {
                             onChange={(e) => setPhoneNumber(e.target.value)}
                             value={phoneNumber}
                             pattern="^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$"
-                            autoComplete="tel"
                             className="mt-1 block w-full rounded-md border-blue-gray-300 text-blue-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                           />
                         </div>

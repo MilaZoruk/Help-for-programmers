@@ -12,6 +12,7 @@ const initialState = {
   loading: false,
   userInfo: null,
   error: null,
+  success: false,
 };
 
 export const userSlice = createSlice({
@@ -51,6 +52,7 @@ export const userSlice = createSlice({
     [getUserDetails.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.userInfo = payload;
+      state.success = true;
     },
     [getUserDetails.rejected]: (state, { payload }) => {
       state.loading = false;
