@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
-const ProtectedRoute = () => {
+const SuperuserRoute = () => {
   const { userInfo } = useSelector((state) => state.user);
 
-  if (!userInfo) {
+  if (!userInfo && userInfo.role !== 'superuser') {
     return (
       <div>
         <h1>404 Not Found :(</h1>
@@ -14,4 +14,4 @@ const ProtectedRoute = () => {
 
   return <Outlet />;
 };
-export default ProtectedRoute;
+export default SuperuserRoute;
