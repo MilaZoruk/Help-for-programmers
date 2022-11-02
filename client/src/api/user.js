@@ -1,10 +1,9 @@
 /* eslint-disable camelcase */
+import { v4 as uuidv4 } from 'uuid';
 import { supabase } from '../supabase/supabaseClient';
 import serializeUser from '../utils/serializeUser';
 
-const STORAGE_URL = `${
-  import.meta.REACT_APP_SUPABASE_URL
-}/storage/v1/object/public/`;
+const STORAGE_URL = `${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/avatars`;
 
 // метод для получения данных пользователя из базы при наличии аутентифицированного пользователя
 // объект, возвращаемый методом `auth.user`, извлекается из локального хранилища
@@ -68,54 +67,48 @@ const logout = async () => {
 };
 
 // метод для обновления данных пользователя
-const update = async (data) => {
+const update = async (newData) => {
   // получаем объект с данными пользователя
-  const user = supabase.auth.user();
-  if (!user) return;
-  const { data: _user, error } = await supabase
+  const { data } = await supabase.auth.getSession();
+  const { id } = data.session.user;
+  if (!data) return;
+  const { error } = await supabase
     .from('users')
-    .update(data)
-    .match({ id: user.id })
+    .update(newData)
+    .match({ id })
     .single();
   if (error) throw error;
-  return _user;
+  return newData;
 };
 
 // метод принимает файл - аватар пользователя
 const uploadAvatar = async (file) => {
-  const user = supabase.auth.user();
-  if (!user) return;
-  const { id } = user;
+  const { data } = await supabase.auth.getSession();
+  if (!data) return;
+  const { id } = data.session.user;
   // извлекаем расширение из названия файла
   // метод `at` появился в `ECMAScript` в этом году
   // он позволяет простым способом извлекать элементы массива с конца
-  const ext = file.name.split('.').at(-1);
+  const fileExt = file.name.split('.').at(-1);
   // формируем название аватара
-  const name = `${id}.${ext}`;
+  const name = `${uuidv4()}.${fileExt}`;
   // загружаем файл в хранилище
-  const {
-    // возвращаемый объект имеет довольно странную форму
-    data: { Key },
-    error,
-  } = await supabase.storage.from('avatars').upload(name, file, {
-    // не кешировать файл - это важно!
-    cacheControl: 'no-cache',
-    // перезаписывать аватар при наличии
-    upsert: true,
-  });
-  if (error) throw error;
-  // формируем путь к файлу
-  const avatar_url = STORAGE_URL + Key;
-  // обновляем данные пользователя -
+  const { error: uploadError } = await supabase.storage
+    .from('avatars')
+    .upload(name, file);
+  // прописываем полный путь к аватару
+  const fullAvatarPath = `${STORAGE_URL}/${name}`;
+  if (uploadError) throw uploadError;
+  // обновляем данные пользователя
   // записываем путь к аватару
-  const { data: _user, error: _error } = await supabase
+  const { error: _error } = await supabase
     .from('users')
-    .update({ avatar_url })
+    .update({ avatar_url: fullAvatarPath })
     .match({ id })
     .single();
   if (_error) throw _error;
-  // возвращаем обновленного пользователя
-  return _user;
+  // возвращаем обновленный путь аватара
+  return fullAvatarPath;
 };
 
 const userApi = { get, register, login, logout, update, uploadAvatar };

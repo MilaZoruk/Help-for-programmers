@@ -11,7 +11,7 @@ import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import Home from './components/Home/Home';
 import Profile from './components/Profile/Profile';
-import ProfileTEST from './components/Profile/ProfileTEST';
+import ProfileSettings from './components/Profile/ProfileSettings';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/profile-test" element={<ProfileTEST />} />
+          <Route path="/profile-settings" element={<ProfileSettings />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>

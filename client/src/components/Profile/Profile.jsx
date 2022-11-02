@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 export default function Profile() {
-  const { userInfo, loading } = useSelector((state) => state.user);
+  const { userInfo } = useSelector((state) => state.user);
   return (
     <div className="flex items-center justify-center px-5 py-5">
       <div

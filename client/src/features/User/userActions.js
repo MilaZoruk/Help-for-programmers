@@ -58,3 +58,33 @@ export const logoutUser = createAsyncThunk(
     }
   }
 );
+
+export const uploadNewAvatar = createAsyncThunk(
+  'user/uploadAvatar',
+  async (avatar, { rejectWithValue }) => {
+    try {
+      const newAvatarPath = await userApi.uploadAvatar(avatar);
+      return newAvatarPath;
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      }
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateUserInfo = createAsyncThunk(
+  'user/updateInfo',
+  async (newData, { rejectWithValue }) => {
+    try {
+      const updateInfo = await userApi.update(newData);
+      return updateInfo;
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      }
+      return rejectWithValue(error.message);
+    }
+  }
+);
