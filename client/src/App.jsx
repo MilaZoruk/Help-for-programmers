@@ -29,7 +29,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/articles" element={<Articles />} />
-        <Route path="/article" element={<Article />} />
+        <Route path="/article/:id" element={<Article />} />
         <Route path="/relaxroom" element={<Room />} />
         <Route path="" element={<Home />} />
         <Route path="/login" element={<Login />} />
