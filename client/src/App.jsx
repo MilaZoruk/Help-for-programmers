@@ -15,6 +15,7 @@ import Home from './components/Home/Home';
 import Profile from './components/Profile/Profile';
 import ProfileSettings from './components/Profile/ProfileSettings';
 import Room from './components/Room/Room';
+import MagicSphere from './components/MagisSphere/MagicSphere';
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
+      <MagicSphere />
       <Footer />
     </section>
   );
