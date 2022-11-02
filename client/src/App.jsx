@@ -15,6 +15,7 @@ import Home from './components/Home/Home';
 import Profile from './components/Profile/Profile';
 import ProfileSettings from './components/Profile/ProfileSettings';
 import Room from './components/Room/Room';
+import ResetPassword from './components/Profile/ResetPassword';
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/profile-settings" element={<ProfileSettings />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/password-reset" element={<ResetPassword />} />
         </Route>
       </Routes>
       <Footer />
