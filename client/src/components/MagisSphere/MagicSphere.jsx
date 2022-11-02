@@ -3,28 +3,32 @@ import React from 'react'
 import styles from './Magic.module.css';
 import { useState } from 'react';
 import { predictions } from '../../constants/predictions';
+import Predict from './Predict/Predict';
 
 function MagicSphere() {
-    const [isVisible, setIsVisible] = useState(false);
-    let prediction = '';
+    const [prediction, setIsVisible] = useState('');
+    const [inpValue, setInpValue] = useState('');
 
     const onClickHandler = (e) => {
         e.preventDefault();
-        console.log('it works');
+        const { value } = e.target[0];
+
+        if (!value) return alert('Question must be filled out')
         let index = Math.floor(Math.random() * predictions.length)
-        prediction = predictions[index];
-        setIsVisible(true);
+        setIsVisible(predictions[index]);
     }
+
     const onChangeHandler = (e) => {
-        console.log(e.target.value);
+        const { value } = e.target;
+        setInpValue(value);
     }
 
     return (
         <div >
-            <div>{isVisible ? <p>{prediction}</p> : null}</div>
             <img src="Magic_Sphere_007.png" alt="magic sphere" className={styles.magicSphere} />
-            <form onSubmit={onClickHandler}>
-                <input onChange={onChangeHandler}type="text" name='ask' placeholder='type you wish to know here' className={styles.input} />
+            <Predict data={prediction} />
+            <form onSubmit={onClickHandler} >
+                <input value={inpValue} onChange={onChangeHandler} type="text" name='ask' placeholder='type you wish to know here' className={styles.input} />
                 <button type='submit' >Get prediction</button>
             </form>
         </div>
