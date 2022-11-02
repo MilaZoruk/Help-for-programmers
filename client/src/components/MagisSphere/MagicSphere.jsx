@@ -3,8 +3,8 @@ import React from 'react'
 
 function MagicSphere() {
     return (
-        <div>MagicSphere
-            <img src="Magic_Sphere_007" alt="magic sphere" />
+        <div className='styles.magicSphere'>MagicSphere
+            <img src="Magic_Sphere_007.png" alt="magic sphere" />
         </div>
     )
 }
