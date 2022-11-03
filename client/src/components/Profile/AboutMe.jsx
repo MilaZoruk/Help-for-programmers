@@ -28,17 +28,27 @@ export default function AboutMe() {
           <p>
             &nbsp;&nbsp;&nbsp;&nbsp;name:{' '}
             <span className="text-yellow-300">
-              '{`${userInfo.first_name} ${userInfo.last_name}`}'
+              '
+              {userInfo.first_name && userInfo.last_name
+                ? `${userInfo.first_name} ${userInfo.last_name}`
+                : '-'}
+              '
             </span>
             ,
           </p>
           <p>
             &nbsp;&nbsp;&nbsp;&nbsp;age:{' '}
-            <span className="text-yellow-300">'{userInfo.age}'</span>,
+            <span className="text-yellow-300">
+              '{userInfo.age ? userInfo.age : '-'}'
+            </span>
+            ,
           </p>
           <p>
             &nbsp;&nbsp;&nbsp;&nbsp;bio:{' '}
-            <span className="text-yellow-300">'{userInfo.bio}'</span>,
+            <span className="text-yellow-300">
+              '{userInfo.bio ? userInfo.bio : '-'}'
+            </span>
+            ,
           </p>
           <p>&nbsp;&nbsp;&#125;</p>
           <p>&#125;</p>

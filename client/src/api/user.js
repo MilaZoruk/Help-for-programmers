@@ -34,8 +34,9 @@ const register = async (userData) => {
   const { data: _user, error: _error } = await supabase
     .from('users')
     // сериализуем объект пользователя
-    .insert([serializeUser(data)])
-    .single();
+    .insert([serializeUser(data, userData)])
+    .single()
+    .select();
   if (_error) throw _error;
   return _user;
 };
