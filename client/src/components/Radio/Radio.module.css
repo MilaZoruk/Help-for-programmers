@@ -1,24 +1,29 @@
 .radio {
     max-width: 70em;
+    z-index: 1;
+    margin-top: -100px;
 }
 .filters {
     display: flex;
     justify-content: center;
     margin-bottom: 2em;
     font-size: 1.2rem;
+    font-size: large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .filters span {
     margin: 0 0.25em;
-    border: 1px solid #e36bae;
+    color: 2px solid #e8a87c;
+    background-color: #e8a87c;
     border-radius: 10px;
     padding: 0.25em 0.75em;
 }
 .filters span:hover {
     cursor: pointer;
-    background: linear-gradient(to bottom right, #e36bae, #fb743e);
+    background: linear-gradient(to bottom right, #c38d9e, #e8a87c);
 }
 .filters .selected {
-    background: linear-gradient(to bottom right, #e36bae, #fb743e);
+    background: linear-gradient(to bottom right, #c38d9e, #e8a87c);
 }
 .stations {
     display: grid;
@@ -36,7 +41,7 @@
     justify-content: center;
 }
 .station:hover {
-    border-color: #e36bae;
+    border-color: #c38d9e;
 }
 .stationName {
     display: flex;
@@ -49,6 +54,8 @@
 .name {
     width: 100%;
     text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
 }
 .stationName img {
     display: block;
@@ -79,4 +86,8 @@ audio {
 }
 .rhap_controls-section .rhap_main-controls button[aria-label="Pause"] svg path {
     fill: #e36bae !important;
+}
+
+.rhap_container .rhap_loop--off .rhap_play-status--paused .Radio_player__IfxDQ{
+    border-radius: 20px;
 }

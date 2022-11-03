@@ -20,6 +20,8 @@ import Room from './components/Room/Room';
 import BackRoom from './components/BackRoom/BackRoom';
 
 import ResetPassword from './components/Profile/ResetPassword';
+import Artworks from './components/RoomArtworks/Artworks';
+import RoomImage from './components/RoomImage/RoomImage';
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +42,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/backroom" element={<BackRoom />} />
+        {/* Тестовые страницы */}
+        <Route path="/bookroom" element={<Artworks />} />
+        <Route path="/imageroom" element={<RoomImage />} />
+        {/* заканчиваются здесь */}
         <Route element={<ProtectedRoute />}>
           <Route path="/profile-settings" element={<ProfileSettings />} />
           <Route path="/profile" element={<Profile />} />

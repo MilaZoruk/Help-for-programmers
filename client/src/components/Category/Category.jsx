@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import {
-  BoltIcon,
-  ChatBubbleBottomCenterTextIcon,
-  GlobeAltIcon,
-  ScaleIcon,
-} from '@heroicons/react/24/outline';
+import { useParams } from 'react-router-dom';
 import getCategoryArticles from '../../api/articles';
 
 export default function Category() {
