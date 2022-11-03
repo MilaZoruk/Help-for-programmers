@@ -23,11 +23,15 @@
 }
 
 .predict{
-
 text-align: center;
 }
+
 .sphere{
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.form{
+  margin: 20px;
 }

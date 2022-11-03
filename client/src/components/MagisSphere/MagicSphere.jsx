@@ -33,7 +33,7 @@ function MagicSphere() {
             <img src="Magic_Sphere_007_350x350.png" alt="magic sphere" className={styles.image} />
             <h4 className={styles.predict}>{prediction}</h4>
             <div className={styles.input}>
-                <form onSubmit={onClickHandler}>
+                <form onSubmit={onClickHandler} className={styles.form}>
                     <label for="text" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Your Email</label>
                     <div class="relative">
                         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
