@@ -4,10 +4,12 @@ import { Route, Routes } from 'react-router-dom';
 
 import Categories from './components/Categories/Categories';
 import Category from './components/Category/Category';
+import AddArticle from './components/Category/AddArticle';
 import { getUserDetails } from './features/User/userActions';
 
 import ProtectedRoute from './routing/ProtectedRoute';
 import SuperuserRoute from './routing/SuperuserRoute';
+import ArticlesRoute from './routing/ArticlesRoute';
 import Navbar from './components/UI/Navbar/Navbar';
 import Footer from './components/UI/Footer/Footer';
 import Register from './components/Auth/Register';
@@ -35,6 +37,9 @@ function App() {
       <Routes>
         <Route path="/categories" element={<Categories />} />
         <Route path="/categories/:id" element={<Category />} />
+        <Route element={<ArticlesRoute />}>
+          <Route path="/addarticle" element={<AddArticle />} />
+        </Route>
         <Route path="/relaxroom" element={<Room />} />
         <Route path="" element={<Home />} />
         <Route path="/login" element={<Login />} />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {
   BoltIcon,
   ChatBubbleBottomCenterTextIcon,
@@ -31,7 +31,7 @@ export default function Category() {
             Читатель, отдохни, перезагрузи мозги
           </p>
           <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-            Здесь статьи по конктерной тематике ... блаблаблала
+            Здесь статьи по конктерной тематике ...
           </p>
         </div>
 

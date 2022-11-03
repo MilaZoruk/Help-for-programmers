@@ -43,19 +43,19 @@ export default function Navbar() {
                         to="/"
                         className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
                       >
-                        Home
+                        Главная
                       </Link>
                       <a
-                        href="/team"
+                        href="/categories"
                         className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                       >
-                        Team
+                        Статьи
                       </a>
                       <a
-                        href="/projects"
+                        href="/relaxroom"
                         className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                       >
-                        Projects
+                        Комната отдыха
                       </a>
                       <a
                         href="/calendar"
