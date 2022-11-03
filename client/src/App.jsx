@@ -12,8 +12,6 @@ import SuperuserRoute from './routing/SuperuserRoute';
 import ArticlesRoute from './routing/ArticlesRoute';
 import Navbar from './components/UI/Navbar/Navbar';
 import Footer from './components/UI/Footer/Footer';
-import Register from './components/Auth/Register';
-import Login from './components/Auth/Login';
 import Home from './components/Home/Home';
 import Profile from './components/Profile/Profile';
 import ProfileSettings from './components/Profile/ProfileSettings';
@@ -22,6 +20,7 @@ import Room from './components/Room/Room';
 import BackRoom from './components/BackRoom/BackRoom';
 
 import ResetPassword from './components/Profile/ResetPassword';
+import RegisterModal from './components/Auth/RegisterModal';
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +34,7 @@ function App() {
     <section className="h-full flex flex-col justify-between items-center">
       <Navbar />
       <Routes>
+        <Route path="/register-modal" element={<RegisterModal />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/categories/:id" element={<Category />} />
         <Route element={<ArticlesRoute />}>
@@ -42,8 +42,6 @@ function App() {
         </Route>
         <Route path="/relaxroom" element={<Room />} />
         <Route path="" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/backroom" element={<BackRoom />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/profile-settings" element={<ProfileSettings />} />

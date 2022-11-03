@@ -8,13 +8,11 @@ export default function Register() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { loading, userData, error, success } = useSelector(
-    (state) => state.user
-  );
+  const { loading, userInfo, error } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (success) navigate('/login');
-  }, [navigate, userData, success]);
+    if (userInfo) navigate('/login');
+  }, [navigate, userInfo]);
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();

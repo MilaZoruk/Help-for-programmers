@@ -25,8 +25,9 @@ export const userSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    [registerUser.fulfilled]: (state) => {
+    [registerUser.fulfilled]: (state, { payload }) => {
       state.loading = false;
+      state.userInfo = payload;
     },
     [registerUser.rejected]: (state, { payload }) => {
       state.loading = false;

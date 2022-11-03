@@ -32,7 +32,14 @@ export default function AdminDashboard() {
     setIsModalShown(false);
   };
 
-  const deleteAdminHandler = () => {
+  const deleteAdminHandler = async () => {
+    await supabase
+      .from('users')
+      .update({ role: 'user' })
+      .eq('id', selectedAdmin)
+      .single()
+      .select();
+
     setShowAdmins((prev) => prev.filter((admin) => admin.id !== selectedAdmin));
     hideAreYouSureModalHandler();
   };
@@ -41,7 +48,12 @@ export default function AdminDashboard() {
     setIsAddAdminModalShown(true);
   };
 
-  const hideAddNewAdmimModal = () => {
+  const hideAddNewAdmimModal = (
+    setSuccessfullyAdded,
+    setAddingNewAdminError
+  ) => {
+    setSuccessfullyAdded(false);
+    setAddingNewAdminError(false);
     setIsAddAdminModalShown(false);
   };
 
@@ -51,6 +63,8 @@ export default function AdminDashboard() {
       <AddAdminModal
         isAddAdminModalShown={isAddAdminModalShown}
         onClose={hideAddNewAdmimModal}
+        onAdd={setShowAdmins}
+        admins={showAdmins}
       />
       <AreYouSureModal
         isModalShown={isModalShown}

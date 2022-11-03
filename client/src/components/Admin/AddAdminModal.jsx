@@ -1,12 +1,16 @@
 /* eslint-disable react/prop-types */
-import { Button, Label, Modal, TextInput } from 'flowbite-react';
+import { Alert, Button, Label, Modal, TextInput } from 'flowbite-react';
+import { SignalIcon } from '@heroicons/react/24/solid';
 import { React, useState } from 'react';
 import { supabase } from '../../supabase/supabaseClient';
-import { makeRandomString } from '../../utils/serializeUser';
 
-export default function AddAdminModal({ onClose, isAddAdminModalShown }) {
+export default function AddAdminModal({
+  onClose,
+  onAdd,
+  isAddAdminModalShown,
+  admins,
+}) {
   const [newAdminEmail, setNewAdminEmail] = useState('');
-  const [newAdminPass, setNewAdminPass] = useState('');
   const [isAddingNewAdmin, setIsAddingNewAdmin] = useState(false);
   const [successfullyAdded, setSuccessfullyAdded] = useState(false);
   const [addingNewAdminError, setAddingNewAdminError] = useState(null);
@@ -15,51 +19,42 @@ export default function AddAdminModal({ onClose, isAddAdminModalShown }) {
     setNewAdminEmail(e.target.value);
   };
 
-  const newAdminPassHandler = (e) => {
-    setNewAdminPass(e.target.value);
-  };
-
   const addNewAdmin = async () => {
-    console.log('Adding new admin');
     setIsAddingNewAdmin(true);
+    setAddingNewAdminError(null);
 
-    const { data, error } = await supabase.auth.signUp({
-      email: newAdminEmail,
-      password: newAdminPass,
-    });
+    try {
+      if (admins.findIndex((admin) => admin.email === newAdminEmail) !== -1) {
+        throw new Error('Admin already exists');
+      }
 
-    if (error) {
+      const { data, error } = await supabase
+        .from('users')
+        .update({ role: 'admin' })
+        .eq('email', newAdminEmail)
+        .single()
+        .select();
+
+      if (error) throw new Error('Cannot find user with such email address');
+
+      setSuccessfullyAdded(true);
+      onAdd((prev) => [...prev, data]);
+    } catch (error) {
       setIsAddingNewAdmin(false);
-      setAddingNewAdminError(error);
-    }
-
-    const { data: _user, error: _error } = await supabase
-      .from('users')
-      .insert([
-        {
-          id: data.user.id,
-          email: data.user.email,
-          role: 'admin',
-          avatar_url: `https://avatars.dicebear.com/api/croodles/${makeRandomString(
-            10
-          )}.svg`,
-        },
-      ])
-      .single();
-
-    if (_error) {
+      setAddingNewAdminError(error.message);
+    } finally {
       setIsAddingNewAdmin(false);
-      setAddingNewAdminError(error);
+      setNewAdminEmail('');
     }
-
-    setIsAddingNewAdmin(false);
-    setNewAdminEmail('');
-    setNewAdminPass('');
-    setSuccessfullyAdded(true);
   };
 
   return (
-    <Modal show={isAddAdminModalShown} size="md" popup onClose={onClose}>
+    <Modal
+      show={isAddAdminModalShown}
+      size="md"
+      popup
+      onClose={() => onClose(setSuccessfullyAdded, setAddingNewAdminError)}
+    >
       <Modal.Header />
       <Modal.Body>
         <div className="space-y-6 px-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8">
@@ -78,27 +73,24 @@ export default function AddAdminModal({ onClose, isAddAdminModalShown }) {
               required
             />
           </div>
-          <div>
-            <div className="mb-2 block">
-              <Label htmlFor="password" value="Password" />
-            </div>
-            <TextInput
-              id="password"
-              placeholder="••••••••"
-              type="password"
-              value={newAdminPass}
-              onChange={newAdminPassHandler}
-              required
-            />
-          </div>
-          <div className="w-full">
+          <div className="w-full space-y-4">
             {!successfullyAdded && (
               <Button onClick={addNewAdmin} disabled={isAddingNewAdmin}>
                 {isAddingNewAdmin ? 'Adding...' : 'Add new admin'}
               </Button>
             )}
-            {successfullyAdded && <p>New admin has been added successfully</p>}
-            {addingNewAdminError && <p>{addingNewAdminError}</p>}
+            {successfullyAdded && (
+              <Alert color="success" icon={SignalIcon}>
+                <span className="font-bold">
+                  New admin has been added successfully
+                </span>
+              </Alert>
+            )}
+            {addingNewAdminError && (
+              <Alert color="failure" icon={SignalIcon}>
+                <span className="font-bold">{addingNewAdminError}</span>
+              </Alert>
+            )}
           </div>
         </div>
       </Modal.Body>
