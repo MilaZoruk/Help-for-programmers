@@ -1,4 +1,4 @@
-function makeRandomString(length) {
+export const makeRandomString = (length) => {
   let result = '';
   const characters =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -7,9 +7,9 @@ function makeRandomString(length) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
-}
+};
 
-const serializeUser = (data) =>
+export const serializeUser = (data) =>
   data.user
     ? {
         id: data.user.id,
@@ -19,4 +19,3 @@ const serializeUser = (data) =>
         )}.svg`,
       }
     : null;
-export default serializeUser;
