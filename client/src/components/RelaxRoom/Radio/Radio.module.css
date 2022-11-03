@@ -21,13 +21,14 @@
 .filters span:hover {
     cursor: pointer;
     background: linear-gradient(to bottom right, #c38d9e, #e8a87c);
+    
 }
 .filters .selected {
     background: linear-gradient(to bottom right, #c38d9e, #e8a87c);
 }
 .stations {
     display: grid;
-    grid-template-columns: repeat(3, 33%);
+    grid-template-columns: repeat(4, 25%);
 }
 .station {
     font-size: 1.4rem;
@@ -65,18 +66,36 @@
     border: 2px solid #4c3e5f;
     margin: 0 0.25em;
 }
+
 audio {
     width: 100%;
 }
-.rhap_container.player {
+
+/* .rhap_container rhap_loop--off rhap_play-status--paused Radio_player__IfxDQ {
     background-color: #4c3e5f;
+    z-index: 1;
+    display: flex;
+    justify-items: center;
+    padding: 0.25em 0.75em;
+    border-radius: 10px;
+} */
+
+/* .rhap_container.player {
+    background-color: #4c3e5f;
+    z-index: 1;
     display: flex;
     justify-items: center;
     padding: 0.25em 0.75em;
     border-radius: 10px;
 }
+
 .rhap_stacked .rhap_controls-section {
     margin-top: 0 !important;
+}
+
+.rhap_controls-section{
+    background-color: #4c3e5f;
+    padding: 0%;
 }
 .rhap_controls-section .rhap_volume-controls {
     justify-content: center;
@@ -86,8 +105,4 @@ audio {
 }
 .rhap_controls-section .rhap_main-controls button[aria-label="Pause"] svg path {
     fill: #e36bae !important;
-}
-
-.rhap_container .rhap_loop--off .rhap_play-status--paused .Radio_player__IfxDQ{
-    border-radius: 20px;
-}
+} */

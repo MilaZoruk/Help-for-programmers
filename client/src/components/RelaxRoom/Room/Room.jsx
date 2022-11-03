@@ -1,12 +1,13 @@
 import React from 'react';
 import BackRoom from '../BackRoom/BackRoom';
+import Btn from '../Btn/Btn';
 import Radio from '../Radio/Radio';
-import styles from './Room.module.css';
 
 export default function Room() {
   return (
     <>
-      <Radio className={styles.radio} />
+      <Radio />
+      <Btn />
       <BackRoom />
     </>
   );

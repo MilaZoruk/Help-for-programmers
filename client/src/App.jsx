@@ -16,12 +16,11 @@ import Home from './components/Home/Home';
 import Profile from './components/Profile/Profile';
 import ProfileSettings from './components/Profile/ProfileSettings';
 import AdminDashboard from './components/Admin/AdminDashboard';
-import Room from './components/Room/Room';
-import BackRoom from './components/BackRoom/BackRoom';
+import Room from './components/RelaxRoom/Room/Room';
 
 import ResetPassword from './components/Profile/ResetPassword';
-import Artworks from './components/RoomArtworks/Artworks';
-import RoomImage from './components/RoomImage/RoomImage';
+import Artworks from './components/RelaxRoom/RoomArtworks/Artworks';
+import RoomImage from './components/RelaxRoom/RoomImage/RoomImage';
 
 function App() {
   const dispatch = useDispatch();
@@ -41,10 +40,9 @@ function App() {
         <Route path="" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/backroom" element={<BackRoom />} />
         {/* Тестовые страницы */}
-        <Route path="/bookroom" element={<Artworks />} />
-        <Route path="/imageroom" element={<RoomImage />} />
+        <Route path="/chicago" element={<Artworks />} />
+        <Route path="/clevelend" element={<RoomImage />} />
         {/* заканчиваются здесь */}
         <Route element={<ProtectedRoute />}>
           <Route path="/profile-settings" element={<ProfileSettings />} />

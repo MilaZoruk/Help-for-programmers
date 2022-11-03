@@ -24,7 +24,7 @@ export default function Radio() {
       .searchStations({
         language: 'russia',
         tag: stf,
-        limit: 3,
+        limit: 4,
       })
       .then((data) => data);
 
