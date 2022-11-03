@@ -1,60 +1,55 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { Transition } from '@headlessui/react';
+import { React, useState } from 'react';
+import AboutMe from './AboutMe';
+import EmergencyFormModal from './EmergencyFormModal';
 
 export default function Profile() {
-  const { userInfo } = useSelector((state) => state.user);
+  const [isModalShown, setIsModalShown] = useState(false);
+
+  const closeModalHandler = () => setIsModalShown(false);
+
   return (
-    <div className="flex items-center justify-center px-5 py-5">
-      <div
-        className="rounded-lg shadow-xl bg-gray-900 text-white"
-        style={{ width: 450 }}
+    <>
+      <Transition
+        show={isModalShown}
+        enter="transition-opacity duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-opacity duration-300"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
       >
-        <div className="border-b border-gray-800 px-8 py-3">
-          <div className="inline-block w-3 h-3 mr-2 rounded-full bg-red-500" />
-          <div className="inline-block w-3 h-3 mr-2 rounded-full bg-yellow-300" />
-          <div className="inline-block w-3 h-3 mr-2 rounded-full bg-green-400" />
+        <EmergencyFormModal onClose={closeModalHandler} />
+      </Transition>
+
+      <section className="flex flex-col justify-center items-center p-20 space-y-4">
+        <h2 className="text-3xl text-center font-bold mb-4">
+          Yo, this is your profile page.
+        </h2>
+        <div className="text-center space-y-4">
+          <p className="text-xl">
+            Yeah, we know you are expecting to see something more useful than
+            this...Buuut, to be honest, we don't know yet what to put here.
+          </p>
+          <p className="text-xl">
+            Actually...there is something you can do here. Down below this text
+            you can find{' '}
+            <span className="text-red-600 font-bold">the red button</span>.
+          </p>
+          <p className="text-xl">
+            Just click on it, fill in the form, tell us everything that bothers
+            you too much and we will contact you ASAP. We promise. Thank you.
+          </p>
         </div>
-        <div className="px-8 py-6">
-          <p>
-            <em className="text-blue-400">const</em>{' '}
-            <span className="text-green-400">aboutMe</span>{' '}
-            <span className="text-pink-500">=</span>{' '}
-            <em className="text-blue-400">function</em>() &#123;
-          </p>
-          <p>
-            &nbsp;&nbsp;<span className="text-pink-500">return</span> &#123;
-          </p>
-          <p>
-            &nbsp;&nbsp;&nbsp;&nbsp;name:{' '}
-            <span className="text-yellow-300">
-              '{`${userInfo.first_name} ${userInfo.last_name}`}'
-            </span>
-            ,
-          </p>
-          <p>
-            &nbsp;&nbsp;&nbsp;&nbsp;position:{' '}
-            <span className="text-yellow-300">'fullstack-developer'</span>,
-          </p>
-          <p>
-            &nbsp;&nbsp;&nbsp;&nbsp;website:{' '}
-            <span className="text-yellow-300">
-              '
-              <a
-                href="https://somerandomsite.com"
-                target="_blank"
-                className="text-yellow-300 hover:underline focus:border-none"
-                rel="noreferrer"
-              >
-                someRandomSite.com
-              </a>
-              '
-            </span>
-            ,
-          </p>
-          <p>&nbsp;&nbsp;&#125;</p>
-          <p>&#125;</p>
-        </div>
-      </div>
-    </div>
+        <button
+          onClick={() => setIsModalShown(true)}
+          type="button"
+          className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
+        >
+          Click me!
+        </button>
+        <AboutMe />
+      </section>
+    </>
   );
 }
