@@ -2,8 +2,8 @@ import { React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
-import Articles from './components/Articles/Articles';
-import Article from './components/Article/Article';
+import Categories from './components/Categories/Categories';
+import Category from './components/Category/Category';
 import { getUserDetails } from './features/User/userActions';
 
 import ProtectedRoute from './routing/ProtectedRoute';
@@ -32,8 +32,8 @@ function App() {
     <section className="h-full flex flex-col justify-between items-center">
       <Navbar />
       <Routes>
-        <Route path="/articles" element={<Articles />} />
-        <Route path="/article" element={<Article />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/categories/:id" element={<Category />} />
         <Route path="/relaxroom" element={<Room />} />
         <Route path="" element={<Home />} />
         <Route path="/login" element={<Login />} />
