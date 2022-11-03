@@ -30,7 +30,7 @@ function MagicSphere() {
 
     return (
         <div className={styles.sphere}>
-            <img src="Magic_Sphere_007_350x350.png" alt="magic sphere" className={styles.image} />
+            <div><img src="Magic_Sphere_007_350x350.png" alt="magic sphere" className={styles.image} /></div>
             <h4 className={styles.predict}>{prediction}</h4>
             <div className={styles.input}>
                 <form onSubmit={onClickHandler} className={styles.form}>

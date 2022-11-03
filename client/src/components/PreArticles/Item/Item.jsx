@@ -3,7 +3,6 @@ import React from 'react'
 
 function Item({ data }) {
     const sliced = data.content.slice(0, 80);
-    console.log('file: Item.jsx ~ line 6 ~ sliced', sliced)
     return (
         <div>
             <div class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
