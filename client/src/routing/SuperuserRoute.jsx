@@ -1,8 +1,14 @@
+import { useEffect } from 'react';
+import { useNavigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Outlet } from 'react-router-dom';
 
 const SuperuserRoute = () => {
+  const navigate = useNavigate('/');
   const { userInfo } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (userInfo.role !== 'superuser') navigate('/');
+  }, [userInfo.role, navigate]);
 
   if (!userInfo && userInfo.role !== 'superuser') {
     return (

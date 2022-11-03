@@ -47,7 +47,7 @@ export default function ResetPasswordModal({ onClose }) {
           </button>
           <div className="py-6 px-6 lg:px-8">
             <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-              Your email address
+              Recovery email
             </h3>
             <p className="mb-4">
               We will send a recovery email to the address below.

@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { v4 as uuidv4 } from 'uuid';
 import { supabase } from '../supabase/supabaseClient';
-import serializeUser from '../utils/serializeUser';
+import { serializeUser } from '../utils/serializeUser';
 
 const STORAGE_URL = `${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/avatars`;
 
