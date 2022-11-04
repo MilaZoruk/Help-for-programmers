@@ -18,8 +18,9 @@ import Room from './components/RelaxRoom/Room/Room';
 
 import ResetPassword from './components/Profile/ResetPassword';
 import RegisterModal from './components/Auth/RegisterModal';
-import Artworks from './components/RelaxRoom/RoomArtworks/Artworks';
-import RoomImage from './components/RelaxRoom/RoomImage/RoomImage';
+import RoomChicago from './components/RelaxRoom/RoomChicago/RoomChicago';
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -42,8 +43,8 @@ function App() {
         <Route path="/relaxroom" element={<Room />} />
         <Route path="" element={<Home />} />
         {/* Тестовые страницы */}
-        <Route path="/chicago" element={<Artworks />} />
-        <Route path="/clevelend" element={<RoomImage />} />
+        <Route path="/chicagoartmuseum" element={<RoomChicago />} />
+        {/* <Route path="/clevelend" element={<RoomImage />} /> */}
         {/* заканчиваются здесь */}
         <Route element={<ProtectedRoute />}>
           <Route path="/profile-settings" element={<ProfileSettings />} />

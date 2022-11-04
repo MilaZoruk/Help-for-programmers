@@ -1,15 +1,22 @@
 .btn {
     position: relative;
     z-index: 1;
-    background: #e8a87c;
-    border-radius: 10px;
+    /* background: #e8a87c; */
+    /*border-radius: 10px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin-top: 50px; */
+    width: 50%;
+    
 }
 
-.btn:active{
+.img{
+    position: relative;
+    z-index: 1;
+}
+/* .btn:active{
     background: #c38d9e;
 }
 .btn:hover {
     cursor: pointer;
     background: linear-gradient(to bottom right, #c38d9e, #e8a87c);
-}
+} */
