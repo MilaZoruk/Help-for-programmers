@@ -1,28 +1,34 @@
 .radio {
     max-width: 70em;
+    z-index: 1;
+    margin-top: -100px;
 }
 .filters {
     display: flex;
     justify-content: center;
     margin-bottom: 2em;
     font-size: 1.2rem;
+    font-size: large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .filters span {
     margin: 0 0.25em;
-    border: 1px solid #e36bae;
+    color: 2px solid #e8a87c;
+    background-color: #e8a87c;
     border-radius: 10px;
     padding: 0.25em 0.75em;
 }
 .filters span:hover {
     cursor: pointer;
-    background: linear-gradient(to bottom right, #e36bae, #fb743e);
+    background: linear-gradient(to bottom right, #c38d9e, #e8a87c);
+    
 }
 .filters .selected {
-    background: linear-gradient(to bottom right, #e36bae, #fb743e);
+    background: linear-gradient(to bottom right, #c38d9e, #e8a87c);
 }
 .stations {
     display: grid;
-    grid-template-columns: repeat(3, 33%);
+    grid-template-columns: repeat(4, 25%);
 }
 .station {
     font-size: 1.4rem;
@@ -36,7 +42,7 @@
     justify-content: center;
 }
 .station:hover {
-    border-color: #e36bae;
+    border-color: #c38d9e;
 }
 .stationName {
     display: flex;
@@ -49,6 +55,8 @@
 .name {
     width: 100%;
     text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
 }
 .stationName img {
     display: block;
@@ -58,18 +66,36 @@
     border: 2px solid #4c3e5f;
     margin: 0 0.25em;
 }
+
 audio {
     width: 100%;
 }
-.rhap_container.player {
+
+/* .rhap_container rhap_loop--off rhap_play-status--paused Radio_player__IfxDQ {
     background-color: #4c3e5f;
+    z-index: 1;
+    display: flex;
+    justify-items: center;
+    padding: 0.25em 0.75em;
+    border-radius: 10px;
+} */
+
+/* .rhap_container.player {
+    background-color: #4c3e5f;
+    z-index: 1;
     display: flex;
     justify-items: center;
     padding: 0.25em 0.75em;
     border-radius: 10px;
 }
+
 .rhap_stacked .rhap_controls-section {
     margin-top: 0 !important;
+}
+
+.rhap_controls-section{
+    background-color: #4c3e5f;
+    padding: 0%;
 }
 .rhap_controls-section .rhap_volume-controls {
     justify-content: center;
@@ -79,4 +105,4 @@ audio {
 }
 .rhap_controls-section .rhap_main-controls button[aria-label="Pause"] svg path {
     fill: #e36bae !important;
-}
+} */

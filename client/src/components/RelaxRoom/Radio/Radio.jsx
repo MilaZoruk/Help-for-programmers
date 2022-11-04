@@ -22,9 +22,9 @@ export default function Radio() {
 
     const newStations = await api
       .searchStations({
-        language: 'english',
+        language: 'russia',
         tag: stf,
-        limit: 15,
+        limit: 4,
       })
       .then((data) => data);
 
@@ -34,7 +34,7 @@ export default function Radio() {
   const filters = [
     'all',
     'classical',
-    'country',
+    'popular',
     'dance',
     'disco',
     'house',
