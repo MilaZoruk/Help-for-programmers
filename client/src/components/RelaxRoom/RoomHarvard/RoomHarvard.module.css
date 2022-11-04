@@ -1,0 +1,12 @@
+.allArt{
+    display: inline-block;
+    inline-size: 30%;
+}
+
+.imgARt{
+    width: 30%;
+}
+
+.imgARt:hover{
+    width: 100%;
+}
