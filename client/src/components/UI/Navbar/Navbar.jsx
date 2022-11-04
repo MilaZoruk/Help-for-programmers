@@ -132,7 +132,7 @@ export default function Navbar() {
                                   to="/profile"
                                   className="block px-4 py-2 text-sm text-gray-700"
                                 >
-                                  Your Profile
+                                  Профиль
                                 </Link>
                               </Menu.Item>
                               {userInfo.role === 'superuser' ? (
@@ -141,7 +141,7 @@ export default function Navbar() {
                                     to="/admin-dashboard"
                                     className="block px-4 py-2 text-sm text-gray-700"
                                   >
-                                    Dashboard
+                                    Панель управления
                                   </Link>
                                 </Menu.Item>
                               ) : null}
@@ -150,7 +150,7 @@ export default function Navbar() {
                                   to="/profile-settings"
                                   className="block px-4 py-2 text-sm text-gray-700"
                                 >
-                                  Settings
+                                  Настройки профиля
                                 </Link>
                               </Menu.Item>
                               <Menu.Item>
@@ -159,7 +159,7 @@ export default function Navbar() {
                                   onClick={logoutHandler}
                                   className="block px-4 py-2 text-sm text-gray-700"
                                 >
-                                  Sign out
+                                  Выход
                                 </button>
                               </Menu.Item>
                             </Menu.Items>

@@ -1,32 +1,92 @@
 /* eslint-disable react/prop-types */
-import { React, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../../features/User/userActions';
-import loginSobaka from './loginSobaka.jpg';
+import { React, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { supabase } from "../../supabase/supabaseClient";
+import { Store } from "react-notifications-component";
+import { loginUser } from "../../features/User/userActions";
+
+import loginSobaka from "./loginSobaka.jpg";
 
 export default function LoginModal({ onClose, onRedirect }) {
-  const dispatch = useDispatch();
+  const notification = {
+    insert: "top",
+    container: "top-right",
+    animationIn: ["animate__animated animate__fadeIn"],
+    animationOut: ["animate__animated animate__fadeOut"],
+    dismiss: {
+      duration: 5000,
+      onScreen: true,
+    },
+  };
 
-  const { loading } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.user);
+
+  const [loginLoading, setLoginLoading] = useState(false);
+  const [loginError, setLoginError] = useState(null);
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
-  const formSubmitHandler = (e) => {
+  const formSubmitHandler = async (e) => {
     e.preventDefault();
+    setLoginLoading(true);
+    setLoginError(null);
 
     const email = emailInputRef.current.value;
     const password = passwordInputRef.current.value;
 
-    const data = {
+    const userInput = {
       email,
       password,
     };
 
-    dispatch(loginUser(data));
+    const { data } = await supabase
+      .from("users")
+      .select()
+      .match({ email })
+      .single();
 
-    if (!loading) {
-      onClose();
+    if (!data) {
+      setLoginError("Неверный email или пароль");
+      setLoginLoading(false);
+      return;
+    }
+
+    dispatch(loginUser(userInput));
+    setLoginLoading(false);
+
+    Store.addNotification({
+      ...notification,
+      title: "Успешно",
+      message: "Успешный вход в систему",
+      type: "success",
+    });
+
+    onClose();
+  };
+
+  const gitHubRegisterHandler = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+    });
+
+    if (error) {
+      Store.addNotification({
+        ...notification,
+        title: "Ошибка",
+        message: "Не получилось войти через GitHub",
+        type: "success",
+      });
+    }
+
+    if (data) {
+      Store.addNotification({
+        ...notification,
+        title: "Успешно",
+        message: "Успешный вход через GitHub",
+        type: "success",
+      });
     }
   };
 
@@ -69,7 +129,7 @@ export default function LoginModal({ onClose, onRedirect }) {
                 onSubmit={formSubmitHandler}
                 className="flex flex-col justify-center items-center px-8 pt-6 pb-8 mb-4 bg-white rounded"
               >
-                <div className="mb-4">
+                <div className="w-3/4 mb-4">
                   <label
                     className="block mb-2 text-sm font-bold text-gray-700"
                     htmlFor="email"
@@ -82,9 +142,10 @@ export default function LoginModal({ onClose, onRedirect }) {
                     id="email"
                     type="email"
                     placeholder="Email"
+                    required
                   />
                 </div>
-                <div className="mb-4 md:flex md:justify-between">
+                <div className="w-3/4 mb-4">
                   <div className="mb-4 md:mb-0">
                     <label
                       className="block mb-2 text-sm font-bold text-gray-700"
@@ -98,15 +159,22 @@ export default function LoginModal({ onClose, onRedirect }) {
                       id="password"
                       type="password"
                       placeholder="*****"
+                      required
                     />
                   </div>
                 </div>
-                <div className="w-1/2 mb-6 text-center">
+                <div className="w-3/4 mb-6 text-center">
+                  {loginError && (
+                    <p className="text-red-500 text-lg italic mb-4">
+                      {loginError}
+                    </p>
+                  )}
                   <button
-                    className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                    className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline disabled:opacity-25"
                     type="submit"
+                    disabled={loginLoading}
                   >
-                    Войти
+                    {loginLoading ? "Обрабатываем запрос" : "Войти"}
                   </button>
                 </div>
                 <div className="relative">
@@ -119,6 +187,7 @@ export default function LoginModal({ onClose, onRedirect }) {
                 <div className="w-1/2 my-4">
                   <button
                     type="button"
+                    onClick={gitHubRegisterHandler}
                     className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
                   >
                     <span className="sr-only">Sign in with GitHub</span>

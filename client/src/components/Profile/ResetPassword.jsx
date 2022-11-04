@@ -20,7 +20,7 @@ export default function ResetPassword() {
       if (data) navigate('/');
     } else {
       setResettingPass(false);
-      setResetPassError('Passwords do not match');
+      setResetPassError('Пароли не совпадают');
     }
   };
 
@@ -28,7 +28,7 @@ export default function ResetPassword() {
     <div className="w-full flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       <div className="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
         <h2 className="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-          Change Password
+          Обновить пароль
         </h2>
         <form
           className="mt-4 space-y-4 lg:mt-5 md:space-y-5"
@@ -39,7 +39,7 @@ export default function ResetPassword() {
               htmlFor="password"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              New Password
+              Новый пароль
             </label>
             <input
               type="password"
@@ -56,7 +56,7 @@ export default function ResetPassword() {
               htmlFor="confirm-password"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Confirm password
+              Подтверждение пароля
             </label>
             <input
               type="password"
@@ -73,7 +73,7 @@ export default function ResetPassword() {
             type="submit"
             className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
           >
-            {resettingPass ? 'Updating...' : 'Reset passwod'}
+            {resettingPass ? 'Обновляем...' : 'Обновить пароль'}
           </button>
         </form>
       </div>
