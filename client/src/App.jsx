@@ -18,8 +18,11 @@ import Room from './components/RelaxRoom/Room/Room';
 
 import ResetPassword from './components/Profile/ResetPassword';
 import RegisterModal from './components/Auth/RegisterModal';
-import Artworks from './components/RelaxRoom/RoomArtworks/Artworks';
-import RoomImage from './components/RelaxRoom/RoomImage/RoomImage';
+import RoomChicago from './components/RelaxRoom/RoomChicago/RoomChicago';
+import RoomClevelend from './components/RelaxRoom/RoomClevelend/RoomClevelend';
+import RoomHarvard from './components/RelaxRoom/RoomHarvard/RoomHarvard';
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -39,12 +42,13 @@ function App() {
         <Route element={<ArticlesRoute />}>
           <Route path="/addarticle" element={<AddArticle />} />
         </Route>
-        <Route path="/relaxroom" element={<Room />} />
         <Route path="" element={<Home />} />
-        {/* Тестовые страницы */}
-        <Route path="/chicago" element={<Artworks />} />
-        <Route path="/clevelend" element={<RoomImage />} />
-        {/* заканчиваются здесь */}
+
+        <Route path="/relaxroom" element={<Room />} />
+        <Route path="/chicagoartmuseum" element={<RoomChicago />} />
+        <Route path="/clevelendartmuseum" element={<RoomClevelend />} />
+        <Route path="/harvardartmuseum" element={<RoomHarvard />} />
+        
         <Route element={<ProtectedRoute />}>
           <Route path="/profile-settings" element={<ProfileSettings />} />
           <Route path="/profile" element={<Profile />} />

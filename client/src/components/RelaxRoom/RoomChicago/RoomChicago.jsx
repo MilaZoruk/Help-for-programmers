@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Artworks.module.css';
+import ReactPlayer from 'react-player'
+import styles from './RoomChicago.module.css';
 
-export default function Artworks() {
+export default function RoomChicago() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
@@ -10,7 +11,7 @@ export default function Artworks() {
   useEffect(() => {
     async function getBook() {
       const resp = await fetch(
-        'https://api.artic.edu/api/v1/artworks?limit=5',
+        'https://api.artic.edu/api/v1/artworks?limit=15',
         {
           method: 'GET',
           headers: {
@@ -34,23 +35,25 @@ export default function Artworks() {
   }
   return (
     <ul>
+     <div className='player-wrapper'>
+        <ReactPlayer
+          className='react-player'
+          url={['https://www.youtube.com/watch?v=WtKHPUrk5q8', 'https://www.youtube.com/watch?v=t3lcMgWoKY4', 'https://www.youtube.com/watch?v=NFPs_cRRGdM']}
+          width='100%'
+        />
+      </div>
       {items.map((el) => (
         <div className={styles.allArt}>
-          <div>
             <img
               className={styles.imgARt}
               src={`https://www.artic.edu/iiif/2/${el.image_id}/full/843,/0/default.jpg`}
               alt={el.title}
             />
+            <div key={el.id}>Название: {el.title}.
+            <p>Место: {el.place_of_origin}.</p>
+            <p>Период: {el.date_start}-{el.date_end}.</p>
+            </div>
           </div>
-          <div>
-            <li key={el.id}>{el.title} </li>
-            <li>{el.place_of_origin}</li>
-            <li>
-              {el.date_start}-{el.date_end}
-            </li>
-          </div>
-        </div>
       ))}
     </ul>
   );
