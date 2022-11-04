@@ -49,7 +49,7 @@ export default function Category() {
                 </dt>
                 <dd className="mt-2 ml-16 text-base text-gray-500">
                   {article.content}
-                  <a href={article.link} target="_blank" rel="noreferrer">
+                  <a href={article.link} target="_blank" rel="noreferrer" className="mt-2 ml-16 text-base text-blue-700">
                     {' '}
                     ...читать далее
                   </a>
