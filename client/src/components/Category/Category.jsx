@@ -18,19 +18,18 @@ export default function Category() {
   const closeModalHandler = () => setIsModalShown(false); 
   
   const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate()
 
   const { id } = useParams();
 
   useEffect(() => {
-    setLoading(true)
     getCategoryArticles(id).then((data) => {
       // console.log(data);
       setArticles(data);
+      setLoading(false)
     });
-    setLoading(false)
-  }, [id]);
+  }, []);
 
   return (
   <>
