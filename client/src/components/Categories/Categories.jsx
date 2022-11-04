@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 
 const callouts = [
   {
@@ -64,7 +65,14 @@ const callouts = [
 
 export default function Categories() {
 
+  const [loading, setLoading] = useState(false);
+
   return (
+    <>
+    {loading ?
+    (<h1>Данные загружаюся!</h1>)
+    :
+    (
     <div className="bg-gray-100">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
@@ -96,5 +104,6 @@ export default function Categories() {
         </div>
       </div>
     </div>
+    )}</>
   );
 }

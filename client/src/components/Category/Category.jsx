@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   BoltIcon,
   ChatBubbleBottomCenterTextIcon,
@@ -7,22 +7,40 @@ import {
   ScaleIcon,
 } from '@heroicons/react/24/outline';
 import { getCategoryArticles } from '../../api/articles';
+import styles from './Category.module.css'
 
 export default function Category() {
   const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
 
   const { id } = useParams();
 
   useEffect(() => {
+    setLoading(true)
     getCategoryArticles(id).then((data) => {
-      console.log(data);
+      // console.log(data);
       setArticles(data);
     });
+    setLoading(false)
   }, [id]);
 
   return (
+    // <>
+    // {loading ?
+    //   (<h1>Данные загружаюся!</h1>)
+    //   :
+    //   (
     <div className="bg-white py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className={styles.backNavigate}>
+              <button onClick={()=>navigate(-1)}
+                    className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                    type="submit"
+                  >
+                    Назад
+              </button>
+          </div>
         <div className="lg:text-center">
           <h2 className="text-lg font-semibold text-indigo-600">
             Должно подтягиваться название темы
@@ -49,7 +67,7 @@ export default function Category() {
                 </dt>
                 <dd className="mt-2 ml-16 text-base text-gray-500">
                   {article.content}
-                  <a href={article.link} target="_blank" rel="noreferrer">
+                  <a className={styles.linkMore} href={article.link} target="_blank" rel="noreferrer">
                     {' '}
                     ...читать далее
                   </a>
@@ -60,5 +78,6 @@ export default function Category() {
         </div>
       </div>
     </div>
+    // )}</>
   );
 }
