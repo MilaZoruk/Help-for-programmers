@@ -1,12 +1,5 @@
-.allArt{
-    display: inline-block;
-    inline-size: 30%;
-}
-
-.imgARt{
-    width: 30%;
-}
-
-.imgARt:hover{
-    width: 100%;
+.carousel{
+   margin-top: 30px;
+    width: 35%;
+    height: 35%;
 }
