@@ -1,6 +1,9 @@
 import { React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
+import { ReactNotifications } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+
 import Categories from './components/Categories/Categories';
 import Category from './components/Category/Category';
 import AddArticle from './components/Category/AddArticle';
@@ -31,6 +34,7 @@ function App() {
 
   const appContent = (
     <section className="h-full flex flex-col justify-between items-center">
+      <ReactNotifications />
       <Navbar />
       <Routes>
         <Route path="/register-modal" element={<RegisterModal />} />

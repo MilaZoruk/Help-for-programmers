@@ -1,31 +1,42 @@
 /* eslint-disable react/prop-types */
-import { React, useRef } from 'react';
+import { React, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../features/User/userActions';
 import loginSobaka from './loginSobaka.jpg';
 
 export default function LoginModal({ onClose, onRedirect }) {
   const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.user);
 
-  const { loading } = useSelector((state) => state.user);
+  const [loginLoading, setLoginLoading] = useState(false);
+  const [loginError, setLoginError] = useState(null);
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
-  const formSubmitHandler = (e) => {
+  const formSubmitHandler = async (e) => {
     e.preventDefault();
+    setLoginLoading(true);
 
     const email = emailInputRef.current.value;
     const password = passwordInputRef.current.value;
 
-    const data = {
+    const userInput = {
       email,
       password,
     };
 
-    dispatch(loginUser(data));
+    dispatch(loginUser(userInput));
 
-    if (!loading) {
+    if (error) {
+      setLoginError('Неверный email или пароль');
+      setLoginLoading(false);
+      return;
+    }
+    
+    setLoginLoading(false);
+
+    if (!loginLoading) {
       onClose();
     }
   };
@@ -69,7 +80,7 @@ export default function LoginModal({ onClose, onRedirect }) {
                 onSubmit={formSubmitHandler}
                 className="flex flex-col justify-center items-center px-8 pt-6 pb-8 mb-4 bg-white rounded"
               >
-                <div className="mb-4">
+                <div className="w-3/4 mb-4">
                   <label
                     className="block mb-2 text-sm font-bold text-gray-700"
                     htmlFor="email"
@@ -82,9 +93,10 @@ export default function LoginModal({ onClose, onRedirect }) {
                     id="email"
                     type="email"
                     placeholder="Email"
+                    required
                   />
                 </div>
-                <div className="mb-4 md:flex md:justify-between">
+                <div className="w-3/4 mb-4">
                   <div className="mb-4 md:mb-0">
                     <label
                       className="block mb-2 text-sm font-bold text-gray-700"
@@ -98,15 +110,20 @@ export default function LoginModal({ onClose, onRedirect }) {
                       id="password"
                       type="password"
                       placeholder="*****"
+                      required
                     />
                   </div>
                 </div>
-                <div className="w-1/2 mb-6 text-center">
+                <div className="w-3/4 mb-6 text-center">
+                {error && (
+                    <p className="text-red-500 text-lg italic mb-4">{loginError}</p>
+                  )}
                   <button
-                    className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                    className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline disabled:opacity-25"
                     type="submit"
+                    disabled={loginLoading}
                   >
-                    Войти
+                    { loginLoading ? 'Обрабатываем запрос' : 'Войти' }
                   </button>
                 </div>
                 <div className="relative">

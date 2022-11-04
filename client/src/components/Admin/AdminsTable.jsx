@@ -6,8 +6,8 @@ export default function AdminsTable({ onOpen, admins }) {
   return (
     <Table>
       <Table.Head>
-        <Table.HeadCell>Full name</Table.HeadCell>
-        <Table.HeadCell>User name</Table.HeadCell>
+        <Table.HeadCell>Полное имя</Table.HeadCell>
+        <Table.HeadCell>Имя пользователя</Table.HeadCell>
         <Table.HeadCell>Email</Table.HeadCell>
         <Table.HeadCell>
           <span className="sr-only">Edit</span>
@@ -29,7 +29,7 @@ export default function AdminsTable({ onOpen, admins }) {
               <Table.Cell>{admin.email}</Table.Cell>
               <Table.Cell>
                 <Button onClick={() => onOpen(admin.id)} color="failure">
-                  Delete
+                  Удалить
                 </Button>
               </Table.Cell>
             </Table.Row>

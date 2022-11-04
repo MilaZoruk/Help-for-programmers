@@ -10,6 +10,7 @@ export default function AdminDashboard() {
   const [isAddAdminModalShown, setIsAddAdminModalShown] = useState(false);
   const [showAdmins, setShowAdmins] = useState([]);
   const [selectedAdmin, setSelectedAdmin] = useState(null);
+  const [deletingAdmin, setDeletingAdmin] = useState(false);
 
   const getAdmins = async () => {
     const { data: users, error } = await supabase
@@ -33,6 +34,8 @@ export default function AdminDashboard() {
   };
 
   const deleteAdminHandler = async () => {
+    setDeletingAdmin(true);
+
     await supabase
       .from('users')
       .update({ role: 'user' })
@@ -41,6 +44,9 @@ export default function AdminDashboard() {
       .select();
 
     setShowAdmins((prev) => prev.filter((admin) => admin.id !== selectedAdmin));
+
+    setDeletingAdmin(false);
+
     hideAreYouSureModalHandler();
   };
 
@@ -59,7 +65,7 @@ export default function AdminDashboard() {
 
   return (
     <section className="flex flex-col justify-center items-center space-y-10">
-      <h2 className="text-3xl font-bold">Dashboard</h2>
+      <h2 className="text-3xl font-bold">Панель управления администраторами</h2>
       <AddAdminModal
         isAddAdminModalShown={isAddAdminModalShown}
         onClose={hideAddNewAdmimModal}
@@ -70,9 +76,10 @@ export default function AdminDashboard() {
         isModalShown={isModalShown}
         onClose={hideAreYouSureModalHandler}
         onDelete={deleteAdminHandler}
+        deletingAdmin={deletingAdmin}
       />
       <AdminsTable admins={showAdmins} onOpen={showAreYouSureModalHandler} />
-      <Button onClick={showAddNewAdminModal}>Add new admin</Button>
+      <Button onClick={showAddNewAdminModal}>Добавить нового админа</Button>
     </section>
   );
 }

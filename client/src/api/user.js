@@ -64,15 +64,6 @@ const register = async (userData) => {
     }
   );
 
-  CometChat.login(data.user.id, AUTH_KEY).then(
-    (user) => {
-      console.log('Login Successful:', { user });
-    },
-    (error) => {
-      console.log('Login failed with exception:', { error });
-    }
-  );
-
   return _user;
 };
 

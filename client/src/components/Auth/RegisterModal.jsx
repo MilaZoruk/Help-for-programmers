@@ -3,43 +3,70 @@ import { React, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { registerUser } from '../../features/User/userActions';
+import { supabase } from '../../supabase/supabaseClient';
 
 import registerCat from './registerCat.jpg';
 
 export default function RegisterModal({ onClose, onRedirect }) {
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.user);
+
+  const [registerLoading, setRegisterLoading] = useState(false);
+  const [registerError, setRegisterError] = useState(null);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState(null);
 
-  const formSubmitHandler = (e) => {
+  const formSubmitHandler = async (e) => {
     e.preventDefault();
-    setError(null);
+    setRegisterLoading(true);
+    setRegisterError(null);
 
-    if (password !== confirmPassword) {
-      setError('Пароли не совпадают');
+    const { data } = await supabase
+    .from('users')
+    .select()
+    .match({ email })
+    .single();
+
+    if (data) {
+      setRegisterError('Пользователь с таким email уже существует');
+      setRegisterLoading(false);
       return;
     }
 
-    const data = {
+    if (password !== confirmPassword) {
+      setRegisterError('Пароли не совпадают.');
+      setRegisterLoading(false);
+      return;
+    }
+
+    const regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+    const isValidPass = regex.test(password);
+
+    if (!isValidPass) {
+      setRegisterError('Пароль должен содержать не менее 8 символов, включая как минимум одну строчную букву, одну заглавную букву, одну цифру и один специальный символ.');
+      setRegisterLoading(false);
+      return;
+    }
+
+    const userInput = {
       email,
       password,
       first_name: firstName,
       last_name: lastName,
     };
 
-    dispatch(registerUser(data));
+    dispatch(registerUser(userInput));
 
     setFirstName('');
     setLastName('');
     setEmail('');
 
-    if (!loading) {
+    setRegisterLoading(false);
+
+    if (!registerLoading) {
       onClose();
     }
   };
@@ -95,6 +122,7 @@ export default function RegisterModal({ onClose, onRedirect }) {
                       placeholder="Имя"
                       value={firstName}
                       onChange={(event) => setFirstName(event.target.value)}
+                      required
                     />
                   </div>
                   <div className="md:ml-2">
@@ -111,6 +139,7 @@ export default function RegisterModal({ onClose, onRedirect }) {
                       placeholder="Фамилия"
                       value={lastName}
                       onChange={(event) => setLastName(event.target.value)}
+                      required
                     />
                   </div>
                 </div>
@@ -128,6 +157,7 @@ export default function RegisterModal({ onClose, onRedirect }) {
                     placeholder="Email"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
+                    required
                   />
                 </div>
                 <div className="mb-4 md:flex md:justify-between">
@@ -145,6 +175,7 @@ export default function RegisterModal({ onClose, onRedirect }) {
                       placeholder="*****"
                       value={password}
                       onChange={(event) => setPassword(event.target.value)}
+                      required
                     />
                   </div>
                   <div className="md:ml-2">
@@ -163,18 +194,20 @@ export default function RegisterModal({ onClose, onRedirect }) {
                       onChange={(event) =>
                         setConfirmPassword(event.target.value)
                       }
+                      required
                     />
                   </div>
                 </div>
                 <div className="mb-6 text-center">
-                  {error && (
-                    <p className="text-red-500 text-lg italic mb-4">{error}</p>
+                  {registerError && (
+                    <p className="text-red-500 text-lg italic mb-4">{registerError}</p>
                   )}
                   <button
-                    className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                    className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline disabled:opacity-25"
                     type="submit"
+                    disabled={registerLoading}
                   >
-                    Зарегистрироваться
+                    { registerLoading ? 'Обрабатываем запрос' : 'Зарегистрироваться' }
                   </button>
                 </div>
                 <div className="relative">

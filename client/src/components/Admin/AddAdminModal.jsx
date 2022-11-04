@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import { Alert, Button, Label, Modal, TextInput } from 'flowbite-react';
-import { SignalIcon } from '@heroicons/react/24/solid';
-import { React, useState } from 'react';
-import { supabase } from '../../supabase/supabaseClient';
+import { Alert, Button, Label, Modal, TextInput } from "flowbite-react";
+import { SignalIcon } from "@heroicons/react/24/solid";
+import { React, useState } from "react";
+import { supabase } from "../../supabase/supabaseClient";
 
 export default function AddAdminModal({
   onClose,
@@ -10,7 +10,7 @@ export default function AddAdminModal({
   isAddAdminModalShown,
   admins,
 }) {
-  const [newAdminEmail, setNewAdminEmail] = useState('');
+  const [newAdminEmail, setNewAdminEmail] = useState("");
   const [isAddingNewAdmin, setIsAddingNewAdmin] = useState(false);
   const [successfullyAdded, setSuccessfullyAdded] = useState(false);
   const [addingNewAdminError, setAddingNewAdminError] = useState(null);
@@ -25,17 +25,17 @@ export default function AddAdminModal({
 
     try {
       if (admins.findIndex((admin) => admin.email === newAdminEmail) !== -1) {
-        throw new Error('Admin already exists');
+        throw new Error("Такой админ уже есть");
       }
 
       const { data, error } = await supabase
-        .from('users')
-        .update({ role: 'admin' })
-        .eq('email', newAdminEmail)
+        .from("users")
+        .update({ role: "admin" })
+        .eq("email", newAdminEmail)
         .single()
         .select();
 
-      if (error) throw new Error('Cannot find user with such email address');
+      if (error) throw new Error("Не смогли найти пользователя с таким email адресом");
 
       setSuccessfullyAdded(true);
       onAdd((prev) => [...prev, data]);
@@ -44,7 +44,7 @@ export default function AddAdminModal({
       setAddingNewAdminError(error.message);
     } finally {
       setIsAddingNewAdmin(false);
-      setNewAdminEmail('');
+      setNewAdminEmail("");
     }
   };
 
@@ -57,42 +57,45 @@ export default function AddAdminModal({
     >
       <Modal.Header />
       <Modal.Body>
-        <div className="space-y-6 px-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8">
-          <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-            Add new admin
-          </h3>
-          <div>
-            <div className="mb-2 block">
-              <Label htmlFor="email" value="Email address" />
+        {!successfullyAdded ? (
+          <>
+            <div className="space-y-6 px-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8">
+              <h3 className="text-xl font-medium text-gray-900 dark:text-white">
+                Добавить нового админа
+              </h3>
+              <div>
+                <div className="mb-2 block">
+                  <Label htmlFor="email" value="Email адрес" />
+                </div>
+                <TextInput
+                  id="email"
+                  placeholder="example@example.com"
+                  value={newAdminEmail}
+                  onChange={newAdminEmailHandler}
+                  required
+                />
+              </div>
+              <div className="w-full space-y-4">
+                {!successfullyAdded && (
+                  <Button onClick={addNewAdmin} disabled={isAddingNewAdmin}>
+                    {isAddingNewAdmin ? "Добавляем..." : "Добавить"}
+                  </Button>
+                )}
+                {addingNewAdminError && (
+                  <Alert color="failure" icon={SignalIcon}>
+                    <span className="font-bold">{addingNewAdminError}</span>
+                  </Alert>
+                )}
+              </div>
             </div>
-            <TextInput
-              id="email"
-              placeholder="name@company.com"
-              value={newAdminEmail}
-              onChange={newAdminEmailHandler}
-              required
-            />
-          </div>
-          <div className="w-full space-y-4">
-            {!successfullyAdded && (
-              <Button onClick={addNewAdmin} disabled={isAddingNewAdmin}>
-                {isAddingNewAdmin ? 'Adding...' : 'Add new admin'}
-              </Button>
-            )}
-            {successfullyAdded && (
-              <Alert color="success" icon={SignalIcon}>
-                <span className="font-bold">
-                  New admin has been added successfully
-                </span>
-              </Alert>
-            )}
-            {addingNewAdminError && (
-              <Alert color="failure" icon={SignalIcon}>
-                <span className="font-bold">{addingNewAdminError}</span>
-              </Alert>
-            )}
-          </div>
-        </div>
+          </>
+        ) : (
+          <Alert color="success" icon={SignalIcon}>
+            <span className="font-bold">
+              Новый админ был успешно добавлен
+            </span>
+          </Alert>
+        )}
       </Modal.Body>
     </Modal>
   );
