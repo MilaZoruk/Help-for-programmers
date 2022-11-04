@@ -1,9 +1,13 @@
-import { React, useState, useEffect } from 'react';
-import { Button } from 'flowbite-react';
-import { supabase } from '../../supabase/supabaseClient';
-import AdminsTable from './AdminsTable';
-import AreYouSureModal from './AreYouSureModal';
-import AddAdminModal from './AddAdminModal';
+import { React, useState, useEffect } from "react";
+import { Button } from "flowbite-react";
+import { supabase } from "../../supabase/supabaseClient";
+import AdminsTable from "./AdminsTable";
+import AreYouSureModal from "./AreYouSureModal";
+import AddAdminModal from "./AddAdminModal";
+
+import SyncLoader from "react-spinners/SyncLoader";
+
+
 
 export default function AdminDashboard() {
   const [isModalShown, setIsModalShown] = useState(false);
@@ -11,17 +15,27 @@ export default function AdminDashboard() {
   const [showAdmins, setShowAdmins] = useState([]);
   const [selectedAdmin, setSelectedAdmin] = useState(null);
   const [deletingAdmin, setDeletingAdmin] = useState(false);
+  const [loadingAdmins, setLoadingAdmins] = useState(true);
+
+  const override = {
+    display: "block",
+    marginTop: '30px',
+    borderColor: "red",
+  };
 
   const getAdmins = async () => {
     const { data: users, error } = await supabase
-      .from('users')
-      .select('*')
-      .eq('role', 'admin');
+      .from("users")
+      .select("*")
+      .eq("role", "admin");
     return users;
   };
 
   useEffect(() => {
-    getAdmins().then((usersAdmins) => setShowAdmins(usersAdmins));
+    getAdmins().then((usersAdmins) => {
+      setShowAdmins(usersAdmins);
+      setLoadingAdmins(false);
+    });
   }, []);
 
   const showAreYouSureModalHandler = (id) => {
@@ -37,9 +51,9 @@ export default function AdminDashboard() {
     setDeletingAdmin(true);
 
     await supabase
-      .from('users')
-      .update({ role: 'user' })
-      .eq('id', selectedAdmin)
+      .from("users")
+      .update({ role: "user" })
+      .eq("id", selectedAdmin)
       .single()
       .select();
 
@@ -78,7 +92,18 @@ export default function AdminDashboard() {
         onDelete={deleteAdminHandler}
         deletingAdmin={deletingAdmin}
       />
-      <AdminsTable admins={showAdmins} onOpen={showAreYouSureModalHandler} />
+      {loadingAdmins ? (
+        <SyncLoader
+        color='red'
+        loading={loadingAdmins}
+        cssOverride={override}
+        size={10}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+      ) : (
+        <AdminsTable admins={showAdmins} onOpen={showAreYouSureModalHandler} />
+      )}
       <Button onClick={showAddNewAdminModal}>Добавить нового админа</Button>
     </section>
   );

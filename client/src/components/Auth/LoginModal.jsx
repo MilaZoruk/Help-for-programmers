@@ -31,6 +31,7 @@ export default function LoginModal({ onClose, onRedirect }) {
   const formSubmitHandler = async (e) => {
     e.preventDefault();
     setLoginLoading(true);
+    setLoginError(null);
 
     const email = emailInputRef.current.value;
     const password = passwordInputRef.current.value;
@@ -40,26 +41,29 @@ export default function LoginModal({ onClose, onRedirect }) {
       password,
     };
 
-    dispatch(loginUser(userInput));
+    const { data } = await supabase
+      .from("users")
+      .select()
+      .match({ email })
+      .single();
 
-    if (error) {
+    if (!data) {
       setLoginError("Неверный email или пароль");
       setLoginLoading(false);
       return;
     }
 
+    dispatch(loginUser(userInput));
     setLoginLoading(false);
 
-    if (!loginLoading) {
-      Store.addNotification({
-        ...notification,
-        title: "Успешно",
-        message: "Успешный вход в систему",
-        type: "success",
-      });
+    Store.addNotification({
+      ...notification,
+      title: "Успешно",
+      message: "Успешный вход в систему",
+      type: "success",
+    });
 
-      onClose();
-    }
+    onClose();
   };
 
   const gitHubRegisterHandler = async () => {
@@ -160,7 +164,7 @@ export default function LoginModal({ onClose, onRedirect }) {
                   </div>
                 </div>
                 <div className="w-3/4 mb-6 text-center">
-                  {error && (
+                  {loginError && (
                     <p className="text-red-500 text-lg italic mb-4">
                       {loginError}
                     </p>
