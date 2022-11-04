@@ -1,0 +1,16 @@
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+.magicSphere {
+  animation: spin 60s linear 0s infinite;
+  margin: 30px;
+  width: 350px;
+  height: 350px;
+}
+
+.input {
+
+    margin-bottom: 20px;
+}
