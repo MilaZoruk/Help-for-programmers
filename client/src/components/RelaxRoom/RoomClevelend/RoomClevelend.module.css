@@ -1,0 +1,15 @@
+.allArt{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin-top: 20px;
+    margin-left: 40px;
+   
+}
+
+.imgARt{
+    width: 30%;
+}
+
+.imgARt:hover{
+    width: 100%;
+}
