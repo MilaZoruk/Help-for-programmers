@@ -19,6 +19,7 @@ import Room from './components/RelaxRoom/Room/Room';
 import ResetPassword from './components/Profile/ResetPassword';
 import RegisterModal from './components/Auth/RegisterModal';
 import RoomChicago from './components/RelaxRoom/RoomChicago/RoomChicago';
+import RoomClevelend from './components/RelaxRoom/RoomClevelend/RoomClevelend';
 
 
 
@@ -40,12 +41,12 @@ function App() {
         <Route element={<ArticlesRoute />}>
           <Route path="/addarticle" element={<AddArticle />} />
         </Route>
-        <Route path="/relaxroom" element={<Room />} />
         <Route path="" element={<Home />} />
-        {/* Тестовые страницы */}
+
+        <Route path="/relaxroom" element={<Room />} />
         <Route path="/chicagoartmuseum" element={<RoomChicago />} />
-        {/* <Route path="/clevelend" element={<RoomImage />} /> */}
-        {/* заканчиваются здесь */}
+        <Route path="/clevelendartmuseum" element={<RoomClevelend />} />
+        
         <Route element={<ProtectedRoute />}>
           <Route path="/profile-settings" element={<ProfileSettings />} />
           <Route path="/profile" element={<Profile />} />

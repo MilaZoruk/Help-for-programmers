@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player'
-import styles from './RoomChicago.module.css';
+import styles from './RoomClevelend.module.css';
 
-export default function RoomChicago() {
+export default function RoomClevelend() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
-  const [image, setImage] = useState('');
+  //   const [image, setImage] = useState('');
 
   useEffect(() => {
     async function getBook() {
       const resp = await fetch(
-        'https://api.artic.edu/api/v1/artworks?limit=15',
+        'https://openaccess-api.clevelandart.org/api/artworks/?limit=5',
         {
           method: 'GET',
           headers: {
@@ -22,7 +22,7 @@ export default function RoomChicago() {
       const result = await resp.json();
       console.log(result);
       setItems(result.data);
-      setImage(result.config);
+      // setImage(result.config);
     }
     getBook();
   }, []);
@@ -33,27 +33,28 @@ export default function RoomChicago() {
   if (isLoaded) {
     return <div>Loading...</div>;
   }
+// добавить проверку на null
   return (
     <ul>
-     <div className='player-wrapper'>
-        <ReactPlayer
+        <div className='player-wrapper'>
+          <ReactPlayer
           className='react-player'
-          url={['https://www.youtube.com/watch?v=WtKHPUrk5q8', 'https://www.youtube.com/watch?v=t3lcMgWoKY4', 'https://www.youtube.com/watch?v=NFPs_cRRGdM']}
+          url={['https://www.youtube.com/watch?v=2pbH57GfmtA&t=1s', 'https://www.youtube.com/watch?v=o_wJueqWFc4', 'https://www.youtube.com/watch?v=AuPubReb76k']}
           width='100%'
         />
       </div>
       {items.map((el) => (
         <div className={styles.allArt}>
-            <img
-              className={styles.imgARt}
-              src={`https://www.artic.edu/iiif/2/${el.image_id}/full/843,/0/default.jpg`}
-              alt={el.title}
-            />
-            <div key={el.id}>Название: {el.title}.
-            <p>Место: {el.place_of_origin}.</p>
-            <p>Период: {el.date_start}-{el.date_end}.</p>
-            </div>
-          </div>
+          <img
+          className={styles.imgARt}
+          src={el.images.web.url} alt={el.title}
+          />
+        <div key={el.id}>Название: {el.title}.
+          <p>Автор: {el.creators[0].description}</p>
+          <p>Забавные факты: {el.fun_fact}</p>
+          <p>Описание: {el.wall_description}</p>
+        </div>
+        </div>
       ))}
     </ul>
   );
