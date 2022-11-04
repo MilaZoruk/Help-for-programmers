@@ -7,16 +7,8 @@ const SuperuserRoute = () => {
   const { userInfo } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (userInfo.role !== 'superuser') navigate('/');
-  }, [userInfo.role, navigate]);
-
-  if (!userInfo && userInfo.role !== 'superuser') {
-    return (
-      <div>
-        <h1>404 Not Found :(</h1>
-      </div>
-    );
-  }
+    if (!userInfo && userInfo?.role !== 'superuser') navigate('/');
+  }, [userInfo, navigate]);
 
   return <Outlet />;
 };

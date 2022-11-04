@@ -1,7 +1,9 @@
 /* eslint-disable camelcase */
+import { CometChat } from '@cometchat-pro/chat';
 import { v4 as uuidv4 } from 'uuid';
 import { supabase } from '../supabase/supabaseClient';
 import { serializeUser } from '../utils/serializeUser';
+import { AUTH_KEY } from '../constants/COMET_CHAT';
 
 const STORAGE_URL = `${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/avatars`;
 
@@ -16,6 +18,16 @@ const get = async () => {
       .match({ id: data.session.user.id })
       .single();
     if (error) throw error;
+
+    CometChat.login(data.session.user.id, AUTH_KEY).then(
+      (user) => {
+        console.log('Login Successful:', { user });
+      },
+      (error) => {
+        console.log('Login failed with exception:', { error });
+      }
+    );
+
     return _userData;
   }
   return null;
@@ -38,6 +50,29 @@ const register = async (userData) => {
     .single()
     .select();
   if (_error) throw _error;
+
+  const user = new CometChat.User(data.user.id);
+  user.setName(`${userData.first_name} ${userData.last_name}`);
+  user.setAvatar(_user.avatar_url);
+
+  CometChat.createUser(user, AUTH_KEY).then(
+    (newUser) => {
+      console.log('user created', newUser);
+    },
+    (error) => {
+      console.log('error', error);
+    }
+  );
+
+  CometChat.login(data.user.id, AUTH_KEY).then(
+    (user) => {
+      console.log('Login Successful:', { user });
+    },
+    (error) => {
+      console.log('Login failed with exception:', { error });
+    }
+  );
+
   return _user;
 };
 
@@ -57,6 +92,16 @@ const login = async (userInput) => {
     .match({ id: data.user.id })
     .single();
   if (_error) throw _error;
+
+  CometChat.login(data.session.user.id, AUTH_KEY).then(
+    (user) => {
+      console.log('Login Successful:', { user });
+    },
+    (error) => {
+      console.log('Login failed with exception:', { error });
+    }
+  );
+
   return _user;
 };
 
@@ -64,6 +109,9 @@ const login = async (userInput) => {
 const logout = async () => {
   const { error } = await supabase.auth.signOut();
   if (error) throw error;
+  CometChat.logout().then(() => {
+    console.log('Logout Successful');
+  });
   return null;
 };
 
