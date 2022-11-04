@@ -1,0 +1,12 @@
+.linkMore{
+    color: blue;
+}
+
+.backNavigate{
+    position: absolute;
+    left: 15px;
+}
+.modalWindow{
+    position: absolute;
+    right: 15px;
+}

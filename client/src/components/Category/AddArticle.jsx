@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 import { supabase } from '../../supabase/supabaseClient';
 
-export default function AddArticle() {
+export default function AddArticle({ onClose }) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [link, setLink] = useState('');
@@ -128,6 +128,7 @@ export default function AddArticle() {
                   </option>{' '}
                 </select>
                 <button
+                onClick={onClose}
                   type="submit"
                   className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
