@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ReactPlayer from 'react-player'
 import styles from './RoomChicago.module.css';
 
 export default function RoomChicago() {
@@ -34,9 +35,13 @@ export default function RoomChicago() {
   }
   return (
     <ul>
-      <video id="videoPlayer" control>
-      <source src="ChicagoARt_ 1913.mp4" type="video/mp4"/>
-      </video>
+     <div className='player-wrapper'>
+        <ReactPlayer
+          className='react-player'
+          url='https://www.youtube.com/watch?v=lSXcbiXB07A'
+          width='100%'
+        />
+      </div>
       {items.map((el) => (
         <div className={styles.allArt}>
             <img
