@@ -1,16 +1,38 @@
 @keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(360deg);}
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.magicSphere {
+.image {
+  margin-left: auto;
+  margin-right: auto;
   animation: spin 60s linear 0s infinite;
-  margin: 30px;
-  width: 350px;
-  height: 350px;
+  margin: 10px;
 }
 
-.input {
+.input{
+  text-align: center;
+  margin: auto;
+  width: 50%;
+}
 
-    margin-bottom: 20px;
+.predict{
+text-align: center;
+
+}
+
+.sphere{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form{
+  margin: 20px;
 }

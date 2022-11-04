@@ -1,11 +1,11 @@
 import { supabase } from '../supabase/supabaseClient';
 
-// export default async function getPosts() {
-//   const { data: posts, error } = await supabase.from('posts').select('*');
-//   return posts;
-// }
+export async function getPosts() {
+  const { data: posts, error } = await supabase.from('posts').select('*');
+  return posts;
+}
 
-export default async function getCategoryArticles(id) {
+export async function getCategoryArticles(id) {
   const { data: posts, error } = await supabase
     .from('posts')
     .select('*')
