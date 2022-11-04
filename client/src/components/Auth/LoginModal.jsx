@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { React, useEffect, useRef } from 'react';
+import { React, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../features/User/userActions';
 import loginSobaka from './loginSobaka.jpg';
