@@ -1,7 +1,7 @@
 .radio {
     max-width: 70em;
     z-index: 1;
-    margin-top: -100px;
+    /* margin-top: -100px; */
 }
 .filters {
     display: flex;

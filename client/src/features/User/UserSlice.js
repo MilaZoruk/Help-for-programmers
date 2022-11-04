@@ -28,6 +28,7 @@ export const userSlice = createSlice({
     [registerUser.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.userInfo = payload;
+      state.error = null;
     },
     [registerUser.rejected]: (state, { payload }) => {
       state.loading = false;
@@ -41,6 +42,7 @@ export const userSlice = createSlice({
     [loginUser.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.userInfo = payload;
+      state.error = null;
     },
     [loginUser.rejected]: (state, { payload }) => {
       state.loading = false;
@@ -49,11 +51,13 @@ export const userSlice = createSlice({
     // getDetails
     [getUserDetails.pending]: (state) => {
       state.loading = true;
+      state.error = null;
     },
     [getUserDetails.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.userInfo = payload;
       state.success = true;
+      state.error = null;
     },
     [getUserDetails.rejected]: (state, { payload }) => {
       state.loading = false;
@@ -62,6 +66,7 @@ export const userSlice = createSlice({
     // Logout
     [logoutUser.pending]: (state) => {
       state.loading = true;
+      state.error = null;
     },
     [logoutUser.fulfilled]: (state) => {
       state.loading = false;
@@ -75,10 +80,12 @@ export const userSlice = createSlice({
     // update Avatar
     [uploadNewAvatar.pending]: (state) => {
       state.loading = true;
+      state.error = null;
     },
     [uploadNewAvatar.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.userInfo.avatar_url = payload;
+      state.error = null;
     },
     [uploadNewAvatar.rejected]: (state, { payload }) => {
       state.loading = false;
@@ -87,9 +94,11 @@ export const userSlice = createSlice({
     // update userInfo
     [updateUserInfo.pending]: (state) => {
       state.loading = true;
+      state.error = null;
     },
     [updateUserInfo.fulfilled]: (state, { payload }) => {
       state.loading = false;
+      state.error = null;
       state.userInfo = {
         ...state.userInfo,
         ...payload,

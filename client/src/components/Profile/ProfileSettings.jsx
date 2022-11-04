@@ -1,15 +1,27 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Transition } from '@headlessui/react';
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Transition } from "@headlessui/react";
+import { Store } from "react-notifications-component";
 import {
   uploadNewAvatar,
   updateUserInfo,
-} from '../../features/User/userActions';
-import ResetPasswordModal from './ResetPasswordModal';
+} from "../../features/User/userActions";
+import ResetPasswordModal from "./ResetPasswordModal";
 
 export default function ProfileSettings() {
+  const notification = {
+    insert: "top",
+    container: "top-right",
+    animationIn: ["animate__animated animate__fadeIn"],
+    animationOut: ["animate__animated animate__fadeOut"],
+    dismiss: {
+      duration: 5000,
+      onScreen: true,
+    },
+  };
+
   const dispatch = useDispatch();
-  const { userInfo, loading } = useSelector((state) => state.user);
+  const { userInfo, loading, error } = useSelector((state) => state.user);
 
   const [isModalShown, setIsModalShown] = useState(false);
 
@@ -24,7 +36,37 @@ export default function ProfileSettings() {
   const [phoneNumber, setPhoneNumber] = useState(userInfo.phone_number);
 
   const avatarUploadingHandler = (e) => {
-    dispatch(uploadNewAvatar(e.target.files[0]));
+    const userAvatar = e.target.files[0];
+
+    if (!userAvatar.type.includes('image')) {
+      Store.addNotification({
+        ...notification,
+        title: "Ошибка",
+        message: "Неверный формат файла",
+        type: "danger",
+      });
+      return;
+    }
+
+    dispatch(uploadNewAvatar(userAvatar));
+
+    if (error) {
+      Store.addNotification({
+        ...notification,
+        title: "Ошибка",
+        message: "Упс, что-то пошло не так",
+        type: "danger",
+      });
+    }
+
+    if (!loading && !error) {
+      Store.addNotification({
+        ...notification,
+        title: "Успешно",
+        message: "Аватар был успешно обновлен",
+        type: "success",
+      });
+    }
   };
 
   const profileSubmitHandler = (e) => {
@@ -41,6 +83,24 @@ export default function ProfileSettings() {
     };
 
     dispatch(updateUserInfo(userInputData));
+
+    if (error) {
+      Store.addNotification({
+        ...notification,
+        title: "Ошибка",
+        message: "Упс, что-то пошло не так",
+        type: "danger",
+      });
+    }
+
+    if (!loading && !error) {
+      Store.addNotification({
+        ...notification,
+        title: "Успешно",
+        message: "Твой профиль успешно обновлен",
+        type: "success",
+      });
+    }
   };
 
   return (
@@ -65,7 +125,7 @@ export default function ProfileSettings() {
                 <div className="flex-1 xl:overflow-y-auto">
                   <div className="mx-auto max-w-3xl py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
                     <h1 className="text-3xl font-bold tracking-tight text-blue-gray-900">
-                      Settings
+                      Настройки профиля
                     </h1>
 
                     <form
@@ -75,8 +135,8 @@ export default function ProfileSettings() {
                       <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
                         <div className="sm:col-span-6">
                           <p className="mt-1 text-sm text-blue-gray-500">
-                            This information will be displayed publicly so be
-                            careful what you share.
+                            Здесь ты можешь изменить или добавить информацию о
+                            себе.
                           </p>
                         </div>
 
@@ -85,7 +145,7 @@ export default function ProfileSettings() {
                             htmlFor="first-name"
                             className="block text-sm font-medium text-blue-gray-900"
                           >
-                            First name
+                            Имя
                           </label>
                           <input
                             type="text"
@@ -103,7 +163,7 @@ export default function ProfileSettings() {
                             htmlFor="last-name"
                             className="block text-sm font-medium text-blue-gray-900"
                           >
-                            Last name
+                            Фамилия
                           </label>
                           <input
                             type="text"
@@ -121,7 +181,7 @@ export default function ProfileSettings() {
                             htmlFor="username"
                             className="block text-sm font-medium text-blue-gray-900"
                           >
-                            Username
+                            Имя пользователя
                           </label>
                           <div className="mt-1 flex rounded-md shadow-sm">
                             <input
@@ -141,7 +201,7 @@ export default function ProfileSettings() {
                             htmlFor="age"
                             className="block text-sm font-medium text-blue-gray-900"
                           >
-                            Age
+                            Возраст
                           </label>
                           <div className="mt-1 flex rounded-md shadow-sm">
                             <input
@@ -160,7 +220,7 @@ export default function ProfileSettings() {
                             htmlFor="photo"
                             className="block text-sm font-medium text-blue-gray-900"
                           >
-                            Photo
+                            Аватар
                           </label>
                           <div className="mt-1 flex items-center">
                             <img
@@ -175,7 +235,7 @@ export default function ProfileSettings() {
                                   className="pointer-events-none relative text-sm font-medium text-blue-gray-900"
                                 >
                                   <span>
-                                    {loading ? 'Updating...' : 'Change'}
+                                    {loading ? "Изменяем" : "Изменить"}
                                   </span>
                                   <span className="sr-only"> user photo</span>
                                 </label>
@@ -198,7 +258,7 @@ export default function ProfileSettings() {
                             htmlFor="description"
                             className="block text-sm font-medium text-blue-gray-900"
                           >
-                            Description
+                            Расскажи о себе
                           </label>
                           <div className="mt-1">
                             <textarea
@@ -211,7 +271,7 @@ export default function ProfileSettings() {
                             />
                           </div>
                           <p className="mt-3 text-sm text-blue-gray-500">
-                            Brief description of your profile.
+                            Краткое описание твоего профиля.
                           </p>
                         </div>
                       </div>
@@ -219,12 +279,8 @@ export default function ProfileSettings() {
                       <div className="grid grid-cols-1 gap-y-6 pt-8 sm:grid-cols-6 sm:gap-x-6">
                         <div className="sm:col-span-6">
                           <h2 className="text-xl font-medium text-blue-gray-900">
-                            Personal Information
+                            Личная информация
                           </h2>
-                          <p className="mt-1 text-sm text-blue-gray-500">
-                            This information will be displayed publicly so be
-                            careful what you share.
-                          </p>
                         </div>
 
                         <div className="sm:col-span-3">
@@ -232,7 +288,7 @@ export default function ProfileSettings() {
                             htmlFor="email-address"
                             className="block text-sm font-medium text-blue-gray-900"
                           >
-                            Email address
+                            Email адрес
                           </label>
                           <input
                             type="email"
@@ -251,7 +307,7 @@ export default function ProfileSettings() {
                             htmlFor="phone-number"
                             className="block text-sm font-medium text-blue-gray-900"
                           >
-                            Phone number
+                            Номер телефона
                           </label>
                           <input
                             type="tel"
@@ -265,8 +321,8 @@ export default function ProfileSettings() {
                         </div>
 
                         <p className="text-sm text-blue-gray-500 sm:col-span-6">
-                          This account was created on{' '}
-                          <time>{userInfo.created_at.split('T')[0]}</time>.
+                          Этот аккаунт был создан{" "}
+                          <time>{userInfo.created_at.split("T")[0]}</time>.
                         </p>
                       </div>
 
@@ -276,14 +332,14 @@ export default function ProfileSettings() {
                           type="button"
                           className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         >
-                          Reset password
+                          Восстановить пароль
                         </button>
                         <button
                           type="submit"
                           disabled={loading}
-                          className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                          className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-25"
                         >
-                          {loading ? 'Saving...' : 'Save'}
+                          {loading ? "Сохраняем..." : "Сохранить"}
                         </button>
                       </div>
                     </form>
