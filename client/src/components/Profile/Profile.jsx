@@ -1,5 +1,7 @@
+/* eslint-disable import/no-relative-packages */
 import { Transition } from '@headlessui/react';
 import { React, useState } from 'react';
+import { CometChatUI } from '../../cometchat-pro-react-ui-kit-master/CometChatWorkspace/src';
 import AboutMe from './AboutMe';
 import EmergencyFormModal from './EmergencyFormModal';
 
@@ -49,6 +51,9 @@ export default function Profile() {
           Click me!
         </button>
         <AboutMe />
+        <div style={{ width: '800px', height: '800px' }}>
+          <CometChatUI />
+        </div>
       </section>
     </>
   );

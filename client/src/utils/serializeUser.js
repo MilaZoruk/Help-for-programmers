@@ -9,13 +9,15 @@ export const makeRandomString = (length) => {
   return result;
 };
 
-export const serializeUser = (data) =>
-  data.user
+export const serializeUser = (firstData, secondData) =>
+  firstData.user
     ? {
-        id: data.user.id,
-        email: data.user.email,
+        id: firstData.user.id,
+        email: firstData.user.email,
         avatar_url: `https://avatars.dicebear.com/api/croodles/${makeRandomString(
           10
         )}.svg`,
+        first_name: secondData.first_name,
+        last_name: secondData.last_name,
       }
     : null;

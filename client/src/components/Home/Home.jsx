@@ -8,12 +8,8 @@ import styles from './Home.module.css';
 
 
 export default function Home() {
-  const { userInfo } = useSelector((state) => state.user);
   return (
     <div>
-      <div className={styles.home}>
-      {userInfo ? `Hello, ${userInfo.user_name}!` : 'Welcome!'}
-      </div>
       <Greeting/>
       <MagicSphere />
       <PreArticles />
