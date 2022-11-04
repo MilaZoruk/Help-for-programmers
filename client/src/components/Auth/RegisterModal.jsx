@@ -1,23 +1,35 @@
 /* eslint-disable react/prop-types */
-import { React, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { React, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Store } from "react-notifications-component";
 
-import { registerUser } from '../../features/User/userActions';
-import { supabase } from '../../supabase/supabaseClient';
+import { registerUser } from "../../features/User/userActions";
+import { supabase } from "../../supabase/supabaseClient";
 
-import registerCat from './registerCat.jpg';
+import registerCat from "./registerCat.jpg";
 
 export default function RegisterModal({ onClose, onRedirect }) {
+  const notification = {
+    insert: "top",
+    container: "top-right",
+    animationIn: ["animate__animated animate__fadeIn"],
+    animationOut: ["animate__animated animate__fadeOut"],
+    dismiss: {
+      duration: 5000,
+      onScreen: true,
+    },
+  };
+
   const dispatch = useDispatch();
 
   const [registerLoading, setRegisterLoading] = useState(false);
   const [registerError, setRegisterError] = useState(null);
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();
@@ -25,28 +37,31 @@ export default function RegisterModal({ onClose, onRedirect }) {
     setRegisterError(null);
 
     const { data } = await supabase
-    .from('users')
-    .select()
-    .match({ email })
-    .single();
+      .from("users")
+      .select()
+      .match({ email })
+      .single();
 
     if (data) {
-      setRegisterError('Пользователь с таким email уже существует');
+      setRegisterError("Пользователь с таким email уже существует");
       setRegisterLoading(false);
       return;
     }
 
     if (password !== confirmPassword) {
-      setRegisterError('Пароли не совпадают.');
+      setRegisterError("Пароли не совпадают.");
       setRegisterLoading(false);
       return;
     }
 
-    const regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+    const regex =
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
     const isValidPass = regex.test(password);
 
     if (!isValidPass) {
-      setRegisterError('Пароль должен содержать не менее 8 символов, включая как минимум одну строчную букву, одну заглавную букву, одну цифру и один специальный символ.');
+      setRegisterError(
+        "Пароль должен содержать не менее 8 символов, включая как минимум одну строчную букву, одну заглавную букву, одну цифру и один специальный символ."
+      );
       setRegisterLoading(false);
       return;
     }
@@ -60,14 +75,44 @@ export default function RegisterModal({ onClose, onRedirect }) {
 
     dispatch(registerUser(userInput));
 
-    setFirstName('');
-    setLastName('');
-    setEmail('');
+    setFirstName("");
+    setLastName("");
+    setEmail("");
 
     setRegisterLoading(false);
 
     if (!registerLoading) {
+      Store.addNotification({
+        ...notification,
+        title: "Успешно",
+        message: "Вы были успешно зарегистрированы",
+        type: "success",
+      });
       onClose();
+    }
+  };
+
+  const gitHubRegisterHandler = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+    });
+
+    if (error) {
+      Store.addNotification({
+        ...notification,
+        title: "Ошибка",
+        message: "Не получилось войти через GitHub",
+        type: "success",
+      });
+    }
+
+    if (data) {
+      Store.addNotification({
+        ...notification,
+        title: "Успешно",
+        message: "Успешный вход через GitHub",
+        type: "success",
+      });
     }
   };
 
@@ -200,14 +245,18 @@ export default function RegisterModal({ onClose, onRedirect }) {
                 </div>
                 <div className="mb-6 text-center">
                   {registerError && (
-                    <p className="text-red-500 text-lg italic mb-4">{registerError}</p>
+                    <p className="text-red-500 text-lg italic mb-4">
+                      {registerError}
+                    </p>
                   )}
                   <button
                     className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline disabled:opacity-25"
                     type="submit"
                     disabled={registerLoading}
                   >
-                    { registerLoading ? 'Обрабатываем запрос' : 'Зарегистрироваться' }
+                    {registerLoading
+                      ? "Обрабатываем запрос"
+                      : "Зарегистрироваться"}
                   </button>
                 </div>
                 <div className="relative">
@@ -220,6 +269,7 @@ export default function RegisterModal({ onClose, onRedirect }) {
                 <div className="mx-auto w-1/2 my-4">
                   <button
                     type="button"
+                    onClick={gitHubRegisterHandler}
                     className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
                   >
                     <span className="sr-only">Sign in with GitHub</span>

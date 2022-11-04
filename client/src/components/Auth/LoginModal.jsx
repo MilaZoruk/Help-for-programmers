@@ -1,10 +1,24 @@
 /* eslint-disable react/prop-types */
-import { React, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../../features/User/userActions';
-import loginSobaka from './loginSobaka.jpg';
+import { React, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { supabase } from "../../supabase/supabaseClient";
+import { Store } from "react-notifications-component";
+import { loginUser } from "../../features/User/userActions";
+
+import loginSobaka from "./loginSobaka.jpg";
 
 export default function LoginModal({ onClose, onRedirect }) {
+  const notification = {
+    insert: "top",
+    container: "top-right",
+    animationIn: ["animate__animated animate__fadeIn"],
+    animationOut: ["animate__animated animate__fadeOut"],
+    dismiss: {
+      duration: 5000,
+      onScreen: true,
+    },
+  };
+
   const dispatch = useDispatch();
   const { error } = useSelector((state) => state.user);
 
@@ -29,15 +43,46 @@ export default function LoginModal({ onClose, onRedirect }) {
     dispatch(loginUser(userInput));
 
     if (error) {
-      setLoginError('Неверный email или пароль');
+      setLoginError("Неверный email или пароль");
       setLoginLoading(false);
       return;
     }
-    
+
     setLoginLoading(false);
 
     if (!loginLoading) {
+      Store.addNotification({
+        ...notification,
+        title: "Успешно",
+        message: "Успешный вход в систему",
+        type: "success",
+      });
+
       onClose();
+    }
+  };
+
+  const gitHubRegisterHandler = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+    });
+
+    if (error) {
+      Store.addNotification({
+        ...notification,
+        title: "Ошибка",
+        message: "Не получилось войти через GitHub",
+        type: "success",
+      });
+    }
+
+    if (data) {
+      Store.addNotification({
+        ...notification,
+        title: "Успешно",
+        message: "Успешный вход через GitHub",
+        type: "success",
+      });
     }
   };
 
@@ -115,15 +160,17 @@ export default function LoginModal({ onClose, onRedirect }) {
                   </div>
                 </div>
                 <div className="w-3/4 mb-6 text-center">
-                {error && (
-                    <p className="text-red-500 text-lg italic mb-4">{loginError}</p>
+                  {error && (
+                    <p className="text-red-500 text-lg italic mb-4">
+                      {loginError}
+                    </p>
                   )}
                   <button
                     className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline disabled:opacity-25"
                     type="submit"
                     disabled={loginLoading}
                   >
-                    { loginLoading ? 'Обрабатываем запрос' : 'Войти' }
+                    {loginLoading ? "Обрабатываем запрос" : "Войти"}
                   </button>
                 </div>
                 <div className="relative">
@@ -136,6 +183,7 @@ export default function LoginModal({ onClose, onRedirect }) {
                 <div className="w-1/2 my-4">
                   <button
                     type="button"
+                    onClick={gitHubRegisterHandler}
                     className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
                   >
                     <span className="sr-only">Sign in with GitHub</span>
