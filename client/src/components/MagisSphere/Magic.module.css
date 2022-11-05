@@ -23,6 +23,8 @@
 
 .predict{
 text-align: center;
+font-size: large;
+min-height: 30px;
 
 }
 
@@ -34,5 +36,5 @@ text-align: center;
 }
 
 .form{
-  margin: 20px;
+  margin: 2px;
 }
