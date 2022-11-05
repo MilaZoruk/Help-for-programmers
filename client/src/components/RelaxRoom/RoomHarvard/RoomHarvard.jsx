@@ -45,7 +45,7 @@ export default function RoomHarvard() {
       </div>
 
       <div className={styles.carousel}>
-      <Carousel autoPlay>
+      <Carousel showThumbs={true} infiniteLoop={true} autoPlay>
                   {items.map((el) => (
                       <div className={styles.allArt}>
                           <img key={el.id}

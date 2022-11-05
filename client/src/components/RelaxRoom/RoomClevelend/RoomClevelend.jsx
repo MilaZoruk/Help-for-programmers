@@ -11,7 +11,7 @@ export default function RoomClevelend() {
   useEffect(() => {
     async function getBook() {
       const resp = await fetch(
-        'https://openaccess-api.clevelandart.org/api/artworks/?limit=5',
+        'https://openaccess-api.clevelandart.org/api/artworks/?limit=25',
         {
           method: 'GET',
           headers: {
@@ -35,27 +35,32 @@ export default function RoomClevelend() {
   }
 // добавить проверку на null
   return (
-    <ul>
-        <div className='player-wrapper'>
+    <><div className={styles.playerwrapper}>
           <ReactPlayer
           className='react-player'
           url={['https://www.youtube.com/watch?v=2pbH57GfmtA&t=1s', 'https://www.youtube.com/watch?v=o_wJueqWFc4', 'https://www.youtube.com/watch?v=AuPubReb76k']}
           width='100%'
         />
       </div>
+
+      <div className={styles.allArt}>
       {items.map((el) => (
-        <div className={styles.allArt}>
+          <>
           <img
           className={styles.imgARt}
-          src={el.images.web.url} alt={el.title}
-          />
-        <div key={el.id}>Название: {el.title}.
-          <p>Автор: {el.creators[0].description}</p>
-          <p>Забавные факты: {el.fun_fact}</p>
-          <p>Описание: {el.wall_description}</p>
-        </div>
-        </div>
+          src={el?.images?.web?.url} alt={el.title} />
+          <br></br>
+            <div key={el.id}>
+              <p>Название: {el.title}.</p>
+              <br></br>
+              <p>Автор: {el.creators[0].description}</p>
+              <br></br>
+              <p>Забавные факты:</p> <p className={styles.wordDescription}>{el.fun_fact}</p>
+              <br></br>
+              <p>Описание:</p> <p className={styles.wordDescription}>{el.wall_description}</p>
+          </div></>
       ))}
-    </ul>
+    </div>
+    </>
   );
 }
