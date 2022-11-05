@@ -37,12 +37,13 @@ export default function RoomHarvard() {
     return <div>Loading...</div>;
   }
   return (
-     <ul><div className='player-wrapper'>
+     <><div className={styles.playerwrapper}>
           <ReactPlayer
               className='react-player'
               url={['https://www.youtube.com/watch?v=3SeHZShpkxU', 'https://www.youtube.com/watch?v=YH7-TCwOHtg', 'https://www.youtube.com/watch?v=Bl7Jp5oDe6o']}
               width='100%' />
-      </div> 
+      </div>
+
       <div className={styles.carousel}>
       <Carousel autoPlay>
                   {items.map((el) => (
@@ -55,6 +56,6 @@ export default function RoomHarvard() {
                   ))}
         </Carousel>
         </div>
-    </ul>
+    </>
   );
 }
