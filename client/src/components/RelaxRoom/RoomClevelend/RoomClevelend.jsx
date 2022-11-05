@@ -33,7 +33,6 @@ export default function RoomClevelend() {
   if (isLoaded) {
     return <div>Loading...</div>;
   }
-// добавить проверку на null
   return (
     <><div className={styles.playerwrapper}>
           <ReactPlayer
