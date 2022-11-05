@@ -53,9 +53,9 @@ export default function RoomChicago() {
             />
             <br></br>
             <div key={el.id}>
-            <p className={styles.wordDescription1}> Название:</p> <p className={styles.wordDescription}>{el.title}.</p>
-            <p className={styles.wordDescription1}>Место:</p> <p className={styles.wordDescription}>{el.place_of_origin}.</p>
-            <p className={styles.wordDescription1}>Период:</p> <p className={styles.wordDescription}>{el.date_start}-{el.date_end}.</p>
+            <p className={styles.wordDescription1}> Название:</p> <p className={styles.wordDescription}>{el.title}</p>
+            <p className={styles.wordDescription1}>Место:</p> <p className={styles.wordDescription}>{el.place_of_origin}</p>
+            <p className={styles.wordDescription1}>Период:</p> <p className={styles.wordDescription}>{el.date_start}-{el.date_end}</p>
           </div>
           </>
       ))}
