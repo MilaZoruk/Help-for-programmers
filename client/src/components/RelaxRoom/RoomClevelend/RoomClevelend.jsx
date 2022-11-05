@@ -51,13 +51,13 @@ export default function RoomClevelend() {
           src={el?.images?.web?.url} alt={el.title} />
           <br></br>
             <div key={el.id}>
-              <p>Название: {el.title}.</p>
+              <p className={styles.wordDescription1}>Название:</p>  <p className={styles.wordDescription}>{el.title}.</p>
               <br></br>
-              <p>Автор: {el.creators[0].description}</p>
+              <p className={styles.wordDescription1}>Автор:</p> <p className={styles.wordDescription}> {el.creators[0].description}</p>
               <br></br>
-              <p>Забавные факты:</p> <p className={styles.wordDescription}>{el.fun_fact}</p>
+              <p className={styles.wordDescription1}>Факты:</p> <p className={styles.wordDescription}>{el.fun_fact}</p>
               <br></br>
-              <p>Описание:</p> <p className={styles.wordDescription}>{el.wall_description}</p>
+              <p className={styles.wordDescription1}>Описание:</p> <p className={styles.wordDescription}>{el.wall_description}</p>
           </div></>
       ))}
     </div>
