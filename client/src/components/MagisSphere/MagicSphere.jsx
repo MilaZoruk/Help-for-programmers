@@ -12,8 +12,8 @@ const appearPrediction = {
 const variants = {
     stop: { y: [0, -10, 0], transition: { duration: 1 } },
     rotate: {
-        rotate: [0, 15, 10, 360, 0, -15, -10, -360],
-        transition: { repeat: Infinity, repeatDelay: 5, duration: 30 }
+        rotate: [0, 15, 10, 160, 0, -15, -10, -260, 0],
+        transition: { repeat: Infinity, repeatDelay: 1, duration: 30 }
     }
 };
 
@@ -50,7 +50,8 @@ function MagicSphere() {
             <div ><motion.img variants={variants}
                 animate={isVisible ? 'stop' : 'rotate'}
                 src="Magic_Sphere_007_350x350.png"
-                alt="magic sphere" /></div>
+                alt="magic sphere" />
+            </div>
             <motion.div
                 animate={isVisible ? 'appear' : 'stop'} variants={appearPrediction} className={styles.predict}>
                 {prediction}
