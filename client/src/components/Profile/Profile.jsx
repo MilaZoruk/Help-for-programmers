@@ -36,7 +36,7 @@ export default function Profile() {
             компании единомышленников.
           </p>
         </div>
-        <div style={{ width: "800px", height: "800px" }}>
+        <div className="bg-white" style={{ width: "800px", height: "800px" }}>
           <CometChatUI />
         </div>
       </section>
