@@ -71,18 +71,20 @@ audio {
     width: 100%;
 }
 
-/* .rhap_container rhap_loop--off rhap_play-status--paused Radio_player__IfxDQ {
+/* .rhap_container .rhap_loop--off .rhap_play-status--paused .Radio_player__IfxDQ {
     background-color: #4c3e5f;
-    z-index: 1;
+    position: relative;
+    z-index: -1;
     display: flex;
     justify-items: center;
     padding: 0.25em 0.75em;
     border-radius: 10px;
-} */
+} 
 
-/* .rhap_container.player {
+.rhap_container.player {
     background-color: #4c3e5f;
-    z-index: 1;
+    position: absolute;
+    z-index: -1;
     display: flex;
     justify-items: center;
     padding: 0.25em 0.75em;

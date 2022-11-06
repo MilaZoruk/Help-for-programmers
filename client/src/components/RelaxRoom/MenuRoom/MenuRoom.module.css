@@ -6,17 +6,21 @@
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     margin-top: 50px; */
     width: 50%;
-    
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:center;
+}
+
+.flexBox{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:center;
 }
 
 .img{
     position: relative;
     z-index: 1;
 }
-/* .btn:active{
-    background: #c38d9e;
-}
-.btn:hover {
-    cursor: pointer;
-    background: linear-gradient(to bottom right, #c38d9e, #e8a87c);
-} */

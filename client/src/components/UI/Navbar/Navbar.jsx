@@ -8,6 +8,8 @@ import { logoutUser } from '../../../features/User/userActions';
 import RegisterModal from '../../Auth/RegisterModal';
 import LoginModal from '../../Auth/LoginModal';
 
+import styles from './Navbar.module.css';
+
 export default function Navbar() {
   const navigate = useNavigate('/');
   const dispatch = useDispatch();
@@ -54,7 +56,7 @@ export default function Navbar() {
         />
       )}
 
-      <header className="w-full">
+      <header className={styles.header}>
         <Disclosure as="nav" className="bg-gray-800 w-full">
           {({ open }) => (
             <>
@@ -88,12 +90,12 @@ export default function Navbar() {
                         >
                           Статьи
                         </Link>
-                        <a
-                          href="/relaxroom"
+                        <Link
+                         to="/relaxroom"
                           className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                         >
                           Комната отдыха
-                        </a>
+                        </Link>
                         <a
                           href="/calendar"
                           className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
