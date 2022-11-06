@@ -88,12 +88,12 @@ export default function Navbar() {
                         >
                           Статьи
                         </Link>
-                        <a
-                          href="/relaxroom"
+                        <Link
+                         to="/relaxroom"
                           className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                         >
                           Комната отдыха
-                        </a>
+                        </Link>
                         <a
                           href="/calendar"
                           className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
