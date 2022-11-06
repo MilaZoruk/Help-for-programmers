@@ -55,7 +55,7 @@ export default function Category() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className={styles.backNavigate}>
               <button onClick={()=>navigate(-1)}
-                    className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                    className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                     type="submit"
                   >
                     Назад
@@ -63,7 +63,7 @@ export default function Category() {
           </div>
           <div className={styles.modalWindow}>
               <button onClick={() => setIsModalShown(true)}
-                    className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                    className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                     type="submit"
                   >
                     Добавить статью
@@ -76,9 +76,7 @@ export default function Category() {
           <p className="mt-2 text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
             Читатель, отдохни, перезагрузи мозги
           </p>
-          <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-            Здесь статьи по конктерной тематике ...
-          </p>
+          <hr className="mt-8"/>
         </div>
 
         <div className="mt-10">
@@ -86,7 +84,7 @@ export default function Category() {
             {articles.map((article) => (
               <div key={article.id} className="relative">
                 <dt>
-                  <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
+                  <div className="absolute flex h-6 w-6 items-center justify-center rounded-full bg-indigo-500 text-white">
                     {/* <article.icon className="h-6 w-6" aria-hidden="true" /> */}
                   </div>
                   <p className="ml-16 text-lg font-medium leading-6 text-gray-900">

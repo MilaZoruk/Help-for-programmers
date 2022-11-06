@@ -4,9 +4,9 @@
 
 .backNavigate{
     position: absolute;
-    left: 15px;
+    left: 300px;
 }
 .modalWindow{
     position: absolute;
-    right: 15px;
+    right: 300px;
 }
