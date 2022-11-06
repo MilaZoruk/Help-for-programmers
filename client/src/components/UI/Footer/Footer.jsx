@@ -1,8 +1,10 @@
 import React from 'react';
 
+// import styles from './Footer.module.css';
+
 export default function Footer() {
   return (
-    <footer className="w-full p-4 md:p-8 lg:p-10 bg-gray-800">
+  <footer className="w-full p-4 md:p-8 lg:p-10 bg-gray-800" style={{position: "relative"}}>
       <div className="mx-auto max-w-screen-xl text-center">
         <a
           href="/something"

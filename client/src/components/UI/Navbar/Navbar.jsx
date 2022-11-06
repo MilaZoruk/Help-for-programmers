@@ -8,6 +8,8 @@ import { logoutUser } from '../../../features/User/userActions';
 import RegisterModal from '../../Auth/RegisterModal';
 import LoginModal from '../../Auth/LoginModal';
 
+import styles from './Navbar.module.css';
+
 export default function Navbar() {
   const navigate = useNavigate('/');
   const dispatch = useDispatch();
@@ -54,7 +56,7 @@ export default function Navbar() {
         />
       )}
 
-      <header className="w-full">
+      <header className={styles.header}>
         <Disclosure as="nav" className="bg-gray-800 w-full">
           {({ open }) => (
             <>
