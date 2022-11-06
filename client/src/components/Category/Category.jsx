@@ -10,8 +10,10 @@ import { getCategoryArticles } from '../../api/articles';
 import styles from './Category.module.css'
 import { Transition } from '@headlessui/react';
 import AddArticle from './AddArticle';
+import { useSelector } from 'react-redux';
 
 export default function Category() {
+  const { userInfo } = useSelector((state) => state.user);// если суперюзер и админ, есть кнопка добавления статьи
 
   const [isModalShown, setIsModalShown] = useState(false);
 
@@ -48,7 +50,7 @@ export default function Category() {
     
      <>
     {loading ?
-     (<h1>Данные загружаюся!</h1>)
+     (<h1>Данные загружаются!</h1>)
      :
      (
     <div className="bg-white py-12">
@@ -61,6 +63,7 @@ export default function Category() {
                     Назад
               </button>
           </div>
+          {userInfo?.role === 'superuser' || userInfo?.role ==='admin'  ? (
           <div className={styles.modalWindow}>
               <button onClick={() => setIsModalShown(true)}
                     className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline"
@@ -69,10 +72,8 @@ export default function Category() {
                     Добавить статью
               </button>
           </div>
+                ) : null} 
         <div className="lg:text-center">
-          {/* <h2 className="text-lg font-semibold text-indigo-600">
-            Должно подтягиваться название темы
-          </h2> */}
           <p className="mt-2 text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
             Читатель, отдохни, перезагрузи мозги
           </p>
