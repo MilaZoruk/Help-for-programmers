@@ -52,7 +52,7 @@ export default function AddArticle({ onClose }) {
                         http://
                       </span>
                       <input
-                        type="text"
+                        type="url"
                         name="link"
                         id="company-website"
                         value={link}
