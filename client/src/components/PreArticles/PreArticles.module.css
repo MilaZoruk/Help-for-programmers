@@ -1,4 +1,5 @@
 .preArticles {
 display:inline-flex;
-justify-content:space-evenly
+justify-content:space-evenly;
+margin-top: 30px;
 }
