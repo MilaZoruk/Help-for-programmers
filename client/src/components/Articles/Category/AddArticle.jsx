@@ -133,7 +133,7 @@ export default function AddArticle({ isModalShown, onClose }) {
                   htmlFor="about"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Краткое описание
+                  Категории
                 </label>
                 <select
                   value={categories}
