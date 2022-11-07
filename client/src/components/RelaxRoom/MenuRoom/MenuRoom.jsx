@@ -64,7 +64,7 @@ const MenuRoom = () => (
     </div>
     </Link>
     
-    <a href="https://www.google.com/maps/@51.50872,-0.1292224,0a,82.2y,339.39h,88.97t/data=!3m4!1e1!3m2!1sHEUBDomqEpCI0Zqt9Djm3g!2e0?source=apiv3" className={styles.btn}>
+    <a href="https://www.google.com/maps/@51.50872,-0.1292224,0a,82.2y,339.39h,88.97t/data=!3m4!1e1!3m2!1sHEUBDomqEpCI0Zqt9Djm3g!2e0?source=apiv3" target="_blank" rel="noreferrer" className={styles.btn}>
     <div className="max-w-sm rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
       
         <img className="rounded-t-lg" src="" alt="" />
