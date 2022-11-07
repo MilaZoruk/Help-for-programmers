@@ -36,7 +36,7 @@ export default function ArticlesSection() {
             чтобы держать наших пользователей в курсе событий.
           </p>
         </div>
-        <div className="mx-auto max-w-screen-sm divide-y divide-gray-200">
+        <div className="mx-auto max-w-screen-sm divide-y divide-gray-400">
           {loading ? (
             <div className="text-center mx-auto my-8">
               <SyncLoader

@@ -6,7 +6,7 @@ export default function OneArticle({ article }) {
 
   return (
     <article className="pb-6 text-center">
-      <h2 className="my-4 text-2xl font-bold tracking-tight text-gray-900 md:text-3xl hover:text-blue-500">
+      <h2 className="my-4 text-xl font-bold tracking-tight text-gray-900 hover:text-blue-500">
         <div className="flex flex-col justify-center items-center">
         <span className="w-2/5 text-gray-800 text-xs font-medium inline-flex justify-center items-center px-2.5 py-0.5 rounded mb-2">
           <svg

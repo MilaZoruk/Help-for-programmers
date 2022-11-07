@@ -5,10 +5,10 @@ export default function EmailSignup() {
     <section>
       <div className="pb-8 px-4 mx-auto max-w-screen-xl lg:px-6 ">
         <div className="mx-auto max-w-screen-md text-center">
-          <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+          <h2 className="mb-4 text-md tracking-tight font-extrabold text-gray-900 dark:text-white">
             Тут можно подписаться на нашу новостную рассылку
           </h2>
-          <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
+          <p className="mb-6 font-light text-gray-500 md:text-md dark:text-gray-400">
             Мы постоянно растем и развиваемся. Если вас заинтересовал наш
             сервис, и вы хотите следить за изменениями и улучшениями, вы можете
             подписаться на нашу новостную рассылку. Никакого спама, обещаем 🤗
