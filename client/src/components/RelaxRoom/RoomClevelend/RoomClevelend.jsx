@@ -20,9 +20,12 @@ export default function RoomClevelend() {
           },
         }
       );
+
       const result = await resp.json();
+
+      const filteResult = result.data.filter((el) => el.title !== 'Gray and Gold' && el.title !=='A Woman\'s Work' && el.title !== 'La Vie') 
       console.log(result);
-      setItems(result.data);
+      setItems(filteResult);
       setIsLoaded(false);
       // setImage(result.config);
     }
@@ -56,7 +59,7 @@ export default function RoomClevelend() {
       <div className={styles.allArt}>
       {items.map((el) => (
           <>
-          <img
+          <img key={el.id}
           className={styles.imgARt}
           src={el?.images?.web?.url} alt={el.title} />
           <br></br>
