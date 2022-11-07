@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { forwardRef } from "react";
 import styles from "./PreArticles.module.css";
-import { getPosts } from "../../api/articles";
+import { getPosts } from "../../../api/articles";
 import { SyncLoader } from "react-spinners";
 
 const blockAnimation = {
