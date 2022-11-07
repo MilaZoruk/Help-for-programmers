@@ -58,6 +58,22 @@ const callouts = [
       "https://st2.depositphotos.com/19167412/49057/v/600/depositphotos_490573710-stock-illustration-psychological-help-burnout-syndrome-emaciated.jpg",
     imageAlt: "Сегодня прекрасный день!",
   },
+  {
+    id: 8,
+    name: "Статьи",
+    description: "Что почитать программисту?",
+    imageSrc:
+      "https://st2.depositphotos.com/19167412/49057/v/600/depositphotos_490573710-stock-illustration-psychological-help-burnout-syndrome-emaciated.jpg",
+    imageAlt: "Сегодня прекрасный день!",
+  },
+  {
+    id: 9,
+    name: "Статьи",
+    description: "Мама-программист",
+    imageSrc:
+      "https://st2.depositphotos.com/19167412/49057/v/600/depositphotos_490573710-stock-illustration-psychological-help-burnout-syndrome-emaciated.jpg",
+    imageAlt: "Сегодня прекрасный день!",
+  },
 ];
 
 export default function Categories() {

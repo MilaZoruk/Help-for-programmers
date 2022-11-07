@@ -24,6 +24,7 @@ import RegisterModal from './components/Auth/RegisterModal';
 import RoomChicago from './components/RelaxRoom/RoomChicago/RoomChicago';
 import RoomClevelend from './components/RelaxRoom/RoomClevelend/RoomClevelend';
 import RoomHarvard from './components/RelaxRoom/RoomHarvard/RoomHarvard';
+// import Background from './components/Background/Background';
 
 
 
@@ -40,6 +41,8 @@ function App() {
       <ReactNotifications />
       <Navbar />
       <Routes>
+     
+      {/* <Route path="/back" element={<Background />} /> */}
         <Route path="/register-modal" element={<RegisterModal />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/categories/:id" element={<Category />} />
