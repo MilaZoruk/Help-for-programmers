@@ -6,14 +6,14 @@ import { CYRILLIC } from '../../constants/cyrillic';
 import { motion } from 'framer-motion';
 
 const appearPrediction = {
-    appear: { opacity: [0, 1], transition: { duration: 3, delay: 0.5 } },
-    stop: { opacity: 0 }
+    appear: { opacity: [0, 1 ,1], transition: { duration: 5, delay: 0.3 } },
+    stop: { opacity:[1,1,0]  }
 };
 const variants = {
     stop: { y: [0, -10, 0], transition: { duration: 1 } },
     rotate: {
-        rotate: [0, 15, 10, 160, 0, -15, -10, -260, 0],
-        transition: { repeat: Infinity, repeatDelay: 1, duration: 30 }
+        rotate: 360,
+        transition: { repeat: Infinity, duration: 30 }
     }
 };
 
@@ -47,7 +47,8 @@ function MagicSphere() {
 
     return (
         <div className={styles.sphere}>
-            <div ><motion.img variants={variants}
+            <div ><motion.img
+                variants={variants}
                 animate={isVisible ? 'stop' : 'rotate'}
                 src="Magic_Sphere_007_350x350.png"
                 alt="magic sphere" />
@@ -72,8 +73,6 @@ function MagicSphere() {
                 </form>
             </div>
         </div>
-
-
     )
 }
 
