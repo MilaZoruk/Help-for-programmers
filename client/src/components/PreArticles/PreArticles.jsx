@@ -56,5 +56,4 @@ const Item = forwardRef(({ data }, ref) => {
     )
 })
 
-// const MotionItem = motion(Item);
 export default PreArticles
