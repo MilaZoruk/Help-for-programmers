@@ -1,4 +1,5 @@
-import whatToRead from "./whatToRead.jpg";
+import whatToRead from "./assets/whatToRead.jpg";
+import momIT from "./assets/momIT.jpg";
 
 export const categories = [
   {
@@ -68,8 +69,7 @@ export const categories = [
     id: 9,
     name: "Статьи",
     description: "Мама-программист",
-    imageSrc:
-      "https://st2.depositphotos.com/19167412/49057/v/600/depositphotos_490573710-stock-illustration-psychological-help-burnout-syndrome-emaciated.jpg",
+    imageSrc: momIT,
     imageAlt: "Сегодня прекрасный день!",
   },
 ];
