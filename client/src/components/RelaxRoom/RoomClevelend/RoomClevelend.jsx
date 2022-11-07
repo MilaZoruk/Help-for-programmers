@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player'
+import { SyncLoader } from 'react-spinners';
 import styles from './RoomClevelend.module.css';
 
 export default function RoomClevelend() {
   const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true);
   const [items, setItems] = useState([]);
   //   const [image, setImage] = useState('');
 
@@ -22,6 +23,7 @@ export default function RoomClevelend() {
       const result = await resp.json();
       console.log(result);
       setItems(result.data);
+      setIsLoaded(false);
       // setImage(result.config);
     }
     getBook();
@@ -31,7 +33,16 @@ export default function RoomClevelend() {
     return <div>Error: {error.message}</div>;
   }
   if (isLoaded) {
-    return <div>Loading...</div>;
+    return <div><SyncLoader
+    color="rgb(104, 117, 245)"
+    loading={isLoaded}
+    cssOverride={ {display: "block",
+    marginTop: "30px",
+    borderColor: "red",}}
+    size={10}
+    aria-label="Loading Spinner"
+    data-testid="loader"
+  /></div>;
   }
   return (
     <><div className={styles.playerwrapper}>

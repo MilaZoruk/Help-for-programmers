@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player'
+import { SyncLoader } from 'react-spinners';
 import styles from './RoomChicago.module.css';
 
 export default function RoomChicago() {
   const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true);
   const [items, setItems] = useState([]);
   const [image, setImage] = useState('');
 
@@ -23,16 +24,27 @@ export default function RoomChicago() {
       console.log(result);
       setItems(result.data);
       setImage(result.config);
+      setIsLoaded(false);
     }
     getBook();
   }, []);
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div>Error: мы уже работаем, чтобы устранить ошибку {error.message}</div>;
   }
   if (isLoaded) {
-    return <div>Loading...</div>;
+    return <div><SyncLoader
+    color="rgb(104, 117, 245)"
+    loading={isLoaded}
+    cssOverride={ {display: "block",
+    marginTop: "30px",
+    borderColor: "red",}}
+    size={10}
+    aria-label="Loading Spinner"
+    data-testid="loader"
+  /></div>;
   }
+
   return (
 
     <><div className={styles.playerwrapper}>

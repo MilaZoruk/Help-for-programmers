@@ -1,27 +1,47 @@
-import { React, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../supabase/supabaseClient';
+import { React, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "../../supabase/supabaseClient";
 
 export default function ResetPassword() {
   const navigate = useNavigate();
-  const [pass, setPass] = useState('');
-  const [confirmedPass, setConfirmedPass] = useState('');
+  const [pass, setPass] = useState("");
+  const [confirmedPass, setConfirmedPass] = useState("");
   const [resetPassEror, setResetPassError] = useState(null);
   const [resettingPass, setResettingPass] = useState(false);
 
   const resetPasswordHandler = async (e) => {
     e.preventDefault();
-    if (pass === confirmedPass) {
-      setResettingPass(true);
-      const { data, error } = await supabase.auth.updateUser({
-        password: pass,
-      });
-      if (error) setResetPassError(error.message);
-      if (data) navigate('/');
-    } else {
+
+    if (pass !== confirmedPass) {
       setResettingPass(false);
-      setResetPassError('Пароли не совпадают');
+      setResetPassError("Пароли не совпадают");
+      return;
     }
+
+    const regex =
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+    const isValidPass = regex.test(pass);
+
+    if (!isValidPass) {
+      setResetPassError(
+        "Пароль должен содержать не менее 8 символов, включая как минимум одну строчную букву, одну заглавную букву, одну цифру и один специальный символ."
+      );
+      setResettingPass(false);
+      return;
+    }
+
+    setResettingPass(true);
+
+    const { data, error } = await supabase.auth.updateUser({
+      password: pass,
+    });
+
+    if (error) {
+      setResetPassError(error.message);
+      return;
+    }
+
+    if (data) navigate("/");
   };
 
   return (
@@ -73,7 +93,7 @@ export default function ResetPassword() {
             type="submit"
             className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
           >
-            {resettingPass ? 'Обновляем...' : 'Обновить пароль'}
+            {resettingPass ? "Обновляем..." : "Обновить пароль"}
           </button>
         </form>
       </div>

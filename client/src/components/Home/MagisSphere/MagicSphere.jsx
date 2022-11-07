@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Magic.module.css";
 import { useState } from "react";
-import { predictions } from "../../constants/predictions";
-import { CYRILLIC } from "../../constants/cyrillic";
+import { predictions } from "../../../constants/predictions";
+import { CYRILLIC } from "../../../constants/cyrillic";
 import { motion } from "framer-motion";
 
 const appearPrediction = {
@@ -86,7 +86,7 @@ function MagicSphere() {
               type="text"
               id="search"
               className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-150 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="задай магическому шару свой вопрос"
+              placeholder="Почему программирование - это творчество?"
               required
               value={inpValue}
               onChange={onChangeHandler}
@@ -95,7 +95,7 @@ function MagicSphere() {
               type="submit"
               className="text-white absolute right-2.5 bottom-2.5 bg-gray-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
             >
-              Получить предсказание
+              Получить ответ
             </button>
           </div>
         </form>
