@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Alert, Button, Label, Modal, TextInput } from "flowbite-react";
+import { Alert, Label, Modal, TextInput } from "flowbite-react";
 import { SignalIcon } from "@heroicons/react/24/solid";
 import { React, useState } from "react";
 import { supabase } from "../../supabase/supabaseClient";
@@ -35,7 +35,8 @@ export default function AddAdminModal({
         .single()
         .select();
 
-      if (error) throw new Error("Не смогли найти пользователя с таким email адресом");
+      if (error)
+        throw new Error("Не смогли найти пользователя с таким email адресом");
 
       setSuccessfullyAdded(true);
       onAdd((prev) => [...prev, data]);
@@ -77,9 +78,14 @@ export default function AddAdminModal({
               </div>
               <div className="w-full space-y-4">
                 {!successfullyAdded && (
-                  <Button onClick={addNewAdmin} disabled={isAddingNewAdmin}>
+                  <button
+                    type="button"
+                    onClick={addNewAdmin}
+                    disabled={isAddingNewAdmin}
+                    className="text-white bg-gray-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
+                  >
                     {isAddingNewAdmin ? "Добавляем..." : "Добавить"}
-                  </Button>
+                  </button>
                 )}
                 {addingNewAdminError && (
                   <Alert color="failure" icon={SignalIcon}>
@@ -91,9 +97,7 @@ export default function AddAdminModal({
           </>
         ) : (
           <Alert color="success" icon={SignalIcon}>
-            <span className="font-bold">
-              Новый админ был успешно добавлен
-            </span>
+            <span className="font-bold">Новый админ был успешно добавлен</span>
           </Alert>
         )}
       </Modal.Body>
