@@ -4,9 +4,9 @@ import { Route, Routes } from 'react-router-dom';
 import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 
-import Categories from './components/Categories/Categories';
-import Category from './components/Category/Category';
-import AddArticle from './components/Category/AddArticle';
+import Categories from './components/Articles/Categories/Categories';
+import Category from './components/Articles/Category/Category';
+import AddArticle from './components/Articles/Category/AddArticle';
 import { getUserDetails } from './features/User/userActions';
 import ProtectedRoute from './routing/ProtectedRoute';
 import SuperuserRoute from './routing/SuperuserRoute';

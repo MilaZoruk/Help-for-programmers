@@ -3,7 +3,6 @@ import Greeting from './Greeting/Greeting';
 import MagicSphere from './MagisSphere/MagicSphere';
 import ArticlesSection from './ArticlesSection/ArticlesSection';
 import EmailSignup from './EmailSignup/EmailSignup';
-// import PreArticles from './PreArticles/PreArticles';
 
 
 export default function Home() {
@@ -13,7 +12,6 @@ export default function Home() {
       <MagicSphere />
       <ArticlesSection />
       <EmailSignup />
-      {/* <PreArticles /> */}
     </div>
   );
 }
