@@ -7,8 +7,6 @@ import AddAdminModal from "./AddAdminModal";
 
 import SyncLoader from "react-spinners/SyncLoader";
 
-
-
 export default function AdminDashboard() {
   const [isModalShown, setIsModalShown] = useState(false);
   const [isAddAdminModalShown, setIsAddAdminModalShown] = useState(false);
@@ -19,7 +17,7 @@ export default function AdminDashboard() {
 
   const override = {
     display: "block",
-    marginTop: '30px',
+    marginTop: "30px",
     borderColor: "red",
   };
 
@@ -94,17 +92,28 @@ export default function AdminDashboard() {
       />
       {loadingAdmins ? (
         <SyncLoader
-        color='red'
-        loading={loadingAdmins}
-        cssOverride={override}
-        size={10}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
+          color="red"
+          loading={loadingAdmins}
+          cssOverride={override}
+          size={10}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
       ) : (
-        <AdminsTable admins={showAdmins} onOpen={showAreYouSureModalHandler} />
+        <>
+          <AdminsTable
+            admins={showAdmins}
+            onOpen={showAreYouSureModalHandler}
+          />
+          <button
+            type="button"
+            onClick={showAddNewAdminModal}
+            className="text-white bg-gray-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
+          >
+            Добавить нового админа
+          </button>
+        </>
       )}
-      <Button onClick={showAddNewAdminModal}>Добавить нового админа</Button>
     </section>
   );
 }

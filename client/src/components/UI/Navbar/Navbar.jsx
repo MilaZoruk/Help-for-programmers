@@ -1,17 +1,17 @@
-import { Fragment, useState } from 'react';
-import { NavLink as Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { Fragment, useState } from "react";
+import { NavLink as Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { logoutUser } from '../../../features/User/userActions';
-import RegisterModal from '../../Auth/RegisterModal';
-import LoginModal from '../../Auth/LoginModal';
-
-import styles from './Navbar.module.css';
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { logoutUser } from "../../../features/User/userActions";
+import RegisterModal from "../../Auth/RegisterModal";
+import LoginModal from "../../Auth/LoginModal";
+import ITHelpersLogo from "../itHelpersLogo.png";
+import styles from "./Navbar.module.css";
 
 export default function Navbar() {
-  const navigate = useNavigate('/');
+  const navigate = useNavigate("/");
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.user);
 
@@ -38,7 +38,7 @@ export default function Navbar() {
 
   const logoutHandler = () => {
     dispatch(logoutUser());
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -66,12 +66,12 @@ export default function Navbar() {
                     <div className="flex-shrink-0">
                       <img
                         className="block h-8 w-auto lg:hidden"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                        src={ITHelpersLogo}
                         alt="Your Company"
                       />
                       <img
-                        className="hidden h-8 w-auto lg:block"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                        className="hidden h-16 w-auto lg:block"
+                        src={ITHelpersLogo}
                         alt="Your Company"
                       />
                     </div>
@@ -80,28 +80,44 @@ export default function Navbar() {
                         {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                         <Link
                           to="/"
-                          className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                          className={({ isActive }) =>
+                            isActive
+                              ? "bg-gray-900 text-white rounded-md px-3 py-2 font-medium text-sm"
+                              : "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm"
+                          }
                         >
                           Главная
                         </Link>
                         <Link
                           to="/categories"
-                          className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                          className={({ isActive }) =>
+                            isActive
+                              ? "bg-gray-900 text-white rounded-md px-3 py-2 font-medium text-sm"
+                              : "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm"
+                          }
                         >
                           Статьи
                         </Link>
                         <Link
-                         to="/relaxroom"
-                          className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                          to="/relaxroom"
+                          className={({ isActive }) =>
+                            isActive
+                              ? "bg-gray-900 text-white rounded-md px-3 py-2 font-medium text-sm"
+                              : "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm"
+                          }
                         >
                           Комната отдыха
                         </Link>
-                        <a
-                          href="/calendar"
-                          className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                        <Link
+                          to="/some-url"
+                          className={({ isActive }) =>
+                            isActive
+                              ? "bg-gray-900 text-white rounded-md px-3 py-2 font-medium text-sm"
+                              : "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm"
+                          }
                         >
                           Calendar
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -137,7 +153,7 @@ export default function Navbar() {
                                   Профиль
                                 </Link>
                               </Menu.Item>
-                              {userInfo.role === 'superuser' ? (
+                              {userInfo.role === "superuser" ? (
                                 <Menu.Item>
                                   <Link
                                     to="/admin-dashboard"
@@ -174,14 +190,14 @@ export default function Navbar() {
                             onClick={() => setIsLoginModalOpen(true)}
                             className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                           >
-                            Login
+                            Войти
                           </Disclosure.Button>
                           <Disclosure.Button
                             as="button"
                             onClick={() => setIsRegisterModalOpen(true)}
                             className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                           >
-                            Register
+                            Зарегистрироваться
                           </Disclosure.Button>
                         </>
                       )}
@@ -210,34 +226,54 @@ export default function Navbar() {
               <Disclosure.Panel className="sm:hidden">
                 <div className="space-y-1 px-2 pt-2 pb-3">
                   {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-                  <Disclosure.Button
-                    as="a"
-                    href="#"
-                    className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
-                  >
-                    Dashboard
-                  </Disclosure.Button>
-                  <Disclosure.Button
-                    as="a"
-                    href="#"
-                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                  >
-                    Team
-                  </Disclosure.Button>
-                  <Disclosure.Button
-                    as="a"
-                    href="#"
-                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                  >
-                    Projects
-                  </Disclosure.Button>
-                  <Disclosure.Button
-                    as="a"
-                    href="#"
-                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                  >
-                    Calendar
-                  </Disclosure.Button>
+                  <Link to="/">
+                    <Disclosure.Button
+                      as="button"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+                          : "block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                      }
+                    >
+                      Главная
+                    </Disclosure.Button>
+                  </Link>
+                  <Link to="/categories">
+                    <Disclosure.Button
+                      as="button"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+                          : "block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                      }
+                    >
+                      Статьи
+                    </Disclosure.Button>
+                  </Link>
+                  <Link to="/relaxroom">
+                    <Disclosure.Button
+                      as="button"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+                          : "block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                      }
+                    >
+                      Комната отдыха
+                    </Disclosure.Button>
+                  </Link>
+                  <Link to="/some-url">
+                    <Disclosure.Button
+                      as="button"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+                          : "block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                      }
+                    >
+                      Calendar
+                    </Disclosure.Button>
+                  </Link>
                 </div>
                 {userInfo ? (
                   <div className="border-t border-gray-700 pt-4 pb-3">
@@ -259,29 +295,30 @@ export default function Navbar() {
                       </div>
                     </div>
                     <div className="mt-3 space-y-1 px-2">
-                      <Disclosure.Button
-                        as="a"
-                        href="#"
-                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                      >
-                        Your Profile
-                      </Disclosure.Button>
-                      {userInfo.role === 'superuser' ? (
+                      <Link to="/profile">
                         <Disclosure.Button
-                          as="a"
-                          href="#"
+                          as="button"
                           className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                         >
-                          Admin
+                          Профиль
                         </Disclosure.Button>
+                      </Link>
+                      {userInfo.role === "superuser" ? (
+                        <Link to="admin-dashboard">
+                          <Disclosure.Button
+                            as="button"
+                            className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                          >
+                            Панель управления
+                          </Disclosure.Button>
+                        </Link>
                       ) : null}
-
                       <Link to="/profile-settings">
                         <Disclosure.Button
                           as="button"
                           className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                         >
-                          Settings
+                          Настройки профиля
                         </Disclosure.Button>
                       </Link>
                       <Disclosure.Button
@@ -289,7 +326,7 @@ export default function Navbar() {
                         onClick={logoutHandler}
                         className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                       >
-                        Sign out
+                        Выход
                       </Disclosure.Button>
                     </div>
                   </div>
@@ -299,13 +336,13 @@ export default function Navbar() {
                       as="button"
                       className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                     >
-                      Login
+                      Войти
                     </Disclosure.Button>
                     <Disclosure.Button
                       as="button"
                       className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                     >
-                      Register
+                      Зарегистрироваться
                     </Disclosure.Button>
                   </>
                 )}

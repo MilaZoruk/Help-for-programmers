@@ -18,7 +18,7 @@ export default function Radio() {
   }, [stationFilter]);
 
   const setupApi = async (stf) => {
-    const api = new RadioBrowserApi(fetch.bind(window), 'My Radio App');
+    const api = new RadioBrowserApi('My Radio App');
 
     const newStations = await api
       .searchStations({
