@@ -50,8 +50,12 @@ export default function RoomChicago() {
     <><div className={styles.playerwrapper}>
         <ReactPlayer
           className='react-player'
-          url={['https://www.youtube.com/watch?v=WtKHPUrk5q8', 'https://www.youtube.com/watch?v=t3lcMgWoKY4', 'https://www.youtube.com/watch?v=NFPs_cRRGdM']}
+          url={['https://www.youtube.com/watch?v=WtKHPUrk5q8', 'https://www.youtube.com/watch?v=t3lcMgWoKY4', 'https://www.youtube.com/watch?v=NFPs_cRRGdM', 'https://www.youtube.com/watch?v=cs75isUzAeg&feature=emb_logo']}
           width='100%'
+          loop="true"
+          controls="1"
+          fs="1"
+          loading="lazy"
         />
       </div>
 

@@ -25,7 +25,7 @@ import RoomChicago from './components/RelaxRoom/RoomChicago/RoomChicago';
 import RoomClevelend from './components/RelaxRoom/RoomClevelend/RoomClevelend';
 import LondonGalery from './components/RelaxRoom/VRLondonGalery/LondonGalery';
 import RussianGalery from './components/RelaxRoom/VRRussianMuseum/RussianGallery';
-import Test from './components/RelaxRoom/Test';
+import PsychoTest from './components/RelaxRoom/Psychotest/PsychoTest';
 // import Background from './components/Background/Background';
 
 
@@ -58,7 +58,7 @@ function App() {
         <Route path="/clevelendartmuseum" element={<RoomClevelend />} />
         <Route path="/russianmuseum" element={<RussianGalery />} />
         <Route path="/londongallery" element={<LondonGalery />} />
-        <Route path="/test" element={<Test/>} />
+        <Route path="/psychotest" element={<PsychoTest/>} />
 
         <Route element={<ProtectedRoute />}>
           <Route path="/profile-settings" element={<ProfileSettings />} />
