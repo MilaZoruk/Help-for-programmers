@@ -17,7 +17,7 @@ export default function EmailSignup() {
             <div className="flex items-center mb-3">
               <div className="relative mr-3 w-full">
                 <label
-                  for="member_email"
+                  htmlFor="member_email"
                   className="hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
                   Email адрес

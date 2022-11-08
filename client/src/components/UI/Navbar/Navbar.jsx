@@ -80,6 +80,7 @@ export default function Navbar() {
                         {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                         <Link
                           to="/"
+                          end
                           className={({ isActive }) =>
                             isActive
                               ? "bg-gray-900 text-white rounded-md px-3 py-2 font-medium text-sm"
