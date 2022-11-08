@@ -10,7 +10,8 @@ const Dance = () => {
             <AudioPlayer
             className={style.player}
             autoPlay
-            src='Dance/SingleLadies.mp3'
+            // src="https://hanzluo.s3-us-west-1.amazonaws.com/music/wuyuwuqing.mp3"
+            src="https://zvukipro.com/uploads/files/2022-08/1661517317_i-like-to-move-it-origina.mp3"
             onPlay={e => console.log("onPlay")} />
             <div></div>
             <div className={style.floor}></div>
