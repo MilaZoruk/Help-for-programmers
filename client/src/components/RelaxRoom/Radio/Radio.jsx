@@ -9,13 +9,7 @@ import styles from './Radio.module.css';
 
 export default function Radio() {
   const [stations, setStations] = useState();
-  const [stationFilter, setStationFilter] = useState('all');
-
-  useEffect(() => {
-    setupApi(stationFilter).then((data) => {
-      setStations(data);
-    });
-  }, [stationFilter]);
+  const [stationFilter, setStationFilter] = useState('hit');
 
   const setupApi = async (stf) => {
     const api = new RadioBrowserApi('My Radio App');
@@ -31,8 +25,32 @@ export default function Radio() {
     return newStations;
   };
 
+  useEffect(() => {
+    setupApi(stationFilter).then((data) => {
+      // const randomStation = data.filter((el) => FourRandom(20).includes())
+      setStations(data);
+    });
+  }, [stationFilter]);
+
+
+  // function FourRandom (num) {
+
+  //   let indexRadio=[];
+  //   let index = 0;
+
+  //   while (index < 4) {
+  //    let random = Math.floor(Math.random()*num);
+
+  //    if (indexRadio.includes(random)) continue
+  //     indexRadio.push(random)
+  //     index+=1
+  //     console.log(indexRadio)
+  //   }
+  //   return indexRadio
+  // }
+
   const filters = [
-    'all',
+    'hit',
     'classical',
     'popular',
     'dance',
