@@ -51,8 +51,12 @@ export default function RoomClevelend() {
     <><div className={styles.playerwrapper}>
           <ReactPlayer
           className='react-player'
-          url={['https://www.youtube.com/watch?v=2pbH57GfmtA&t=1s', 'https://www.youtube.com/watch?v=o_wJueqWFc4', 'https://www.youtube.com/watch?v=AuPubReb76k']}
+          url={['https://www.youtube.com/watch?v=2pbH57GfmtA&t=1s', 'https://www.youtube.com/watch?v=o_wJueqWFc4', 'https://www.youtube.com/watch?v=AuPubReb76k', 'https://www.youtube.com/watch?v=b8hajPxqetk']}
           width='100%'
+          loop="true"
+          controls="1"
+          fs="1"
+          loading="lazy"
         />
       </div>
 
