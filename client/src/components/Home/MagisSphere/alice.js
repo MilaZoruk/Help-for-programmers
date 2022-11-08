@@ -15,7 +15,9 @@ export function alice(inputString) {
     if (candidates.length === 0) {
         return alice(trimIt(words))
     } else {
-        return predictions[candidates[0]]
+        const corellate = candidates.filter((el,i, arr)=>arr.indexOf(el)!==arr.lastIndexOf(el));
+        if (corellate.length) return predictions[corellate[0]];
+        return predictions[candidates[Math.floor(Math.random() * candidates.length)]];
     }
 }
 
