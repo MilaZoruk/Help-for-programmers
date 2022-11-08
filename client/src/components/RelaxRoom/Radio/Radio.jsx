@@ -16,15 +16,8 @@ export default function Radio() {
   };
 
   const [stations, setStations] = useState();
-  const [stationFilter, setStationFilter] = useState("all");
+  const [stationFilter, setStationFilter] = useState('hit');
   const [loadingStations, setLoadingStations] = useState(true);
-
-  useEffect(() => {
-    setupApi(stationFilter).then((data) => {
-      setStations(data);
-      setLoadingStations(false);
-    });
-  }, [stationFilter]);
 
   const setupApi = async (stf) => {
     const api = new RadioBrowserApi("My Radio App");
@@ -40,18 +33,42 @@ export default function Radio() {
     return newStations;
   };
 
+  useEffect(() => {
+    setupApi(stationFilter).then((data) => {
+      // const randomStation = data.filter((el) => FourRandom(20).includes())
+      setStations(data);
+    });
+  }, [stationFilter]);
+
+
+  // function FourRandom (num) {
+
+  //   let indexRadio=[];
+  //   let index = 0;
+
+  //   while (index < 4) {
+  //    let random = Math.floor(Math.random()*num);
+
+  //    if (indexRadio.includes(random)) continue
+  //     indexRadio.push(random)
+  //     index+=1
+  //     console.log(indexRadio)
+  //   }
+  //   return indexRadio
+  // }
+
   const filters = [
-    "all",
-    "classical",
-    "popular",
-    "dance",
-    "disco",
-    "house",
-    "jazz",
-    "pop",
-    "rap",
-    "retro",
-    "rock",
+    'hit',
+    'classical',
+    'popular',
+    'dance',
+    'disco',
+    'house',
+    'jazz',
+    'pop',
+    'rap',
+    'retro',
+    'rock',
   ];
 
   const setDefaultSrc = (event) => {
