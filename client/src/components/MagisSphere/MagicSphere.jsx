@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { predictions } from '../../constants/predictions';
 import { CYRILLIC } from '../../constants/cyrillic';
 import { motion } from 'framer-motion';
+import { alice } from './alice';
 
 const appearPrediction = {
     appear: { opacity: [0, 1 ,1], transition: { duration: 5, delay: 0.3 } },
@@ -26,8 +27,8 @@ function MagicSphere() {
         e.preventDefault();
         const { value } = e.target[0];
         if (!value) return alert('Поле не может быть пустым!')
-        let index = Math.floor(Math.random() * predictions.length)
-        setPrediction(predictions[index]);
+       
+        setPrediction(alice(value));
         setIsVisible(true);
         setTimeout(() => {
             setIsVisible(false);

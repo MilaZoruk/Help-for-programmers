@@ -1,4 +1,4 @@
-import { predictions } from "../../../constants/predictions";
+import { predictions } from "../../constants/predictions";
 
 export function alice(inputString) {
     const words = inputString.match(/[а-я]+/gim);//get words only
