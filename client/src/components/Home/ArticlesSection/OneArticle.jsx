@@ -10,7 +10,7 @@ export default function OneArticle({ article }) {
         <div className="flex flex-col justify-center items-center">
         <span className="w-2/5 text-gray-800 text-xs font-medium inline-flex justify-center items-center px-2.5 py-0.5 rounded mb-2">
           <svg
-            class="mr-1 w-3 h-3"
+            className="mr-1 w-3 h-3"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"

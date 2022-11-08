@@ -133,12 +133,6 @@ export default function ProfileSettings() {
                       className="divide-y-blue-gray-200 mt-6 space-y-8 divide-y"
                     >
                       <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
-                        <div className="sm:col-span-6">
-                          <p className="mt-1 text-sm text-blue-gray-500">
-                            Здесь ты можешь изменить или добавить информацию о
-                            себе.
-                          </p>
-                        </div>
 
                         <div className="sm:col-span-3">
                           <label
@@ -277,11 +271,6 @@ export default function ProfileSettings() {
                       </div>
 
                       <div className="grid grid-cols-1 gap-y-6 pt-8 sm:grid-cols-6 sm:gap-x-6">
-                        <div className="sm:col-span-6">
-                          <h2 className="text-xl font-medium text-blue-gray-900">
-                            Личная информация
-                          </h2>
-                        </div>
 
                         <div className="sm:col-span-3">
                           <label
