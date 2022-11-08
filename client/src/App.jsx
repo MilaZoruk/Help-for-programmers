@@ -4,9 +4,9 @@ import { Route, Routes } from 'react-router-dom';
 import { ReactNotifications } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 
-import Categories from './components/Categories/Categories';
-import Category from './components/Category/Category';
-import AddArticle from './components/Category/AddArticle';
+import Categories from './components/Articles/Categories/Categories';
+import Category from './components/Articles/Category/Category';
+import AddArticle from './components/Articles/Category/AddArticle';
 import { getUserDetails } from './features/User/userActions';
 import ProtectedRoute from './routing/ProtectedRoute';
 import SuperuserRoute from './routing/SuperuserRoute';
@@ -23,7 +23,9 @@ import ResetPassword from './components/Profile/ResetPassword';
 import RegisterModal from './components/Auth/RegisterModal';
 import RoomChicago from './components/RelaxRoom/RoomChicago/RoomChicago';
 import RoomClevelend from './components/RelaxRoom/RoomClevelend/RoomClevelend';
-import RoomHarvard from './components/RelaxRoom/RoomHarvard/RoomHarvard';
+import LondonGalery from './components/RelaxRoom/VRLondonGalery/LondonGalery';
+import RussianGalery from './components/RelaxRoom/VRRussianMuseum/RussianGallery';
+// import Background from './components/Background/Background';
 
 
 
@@ -40,6 +42,8 @@ function App() {
       <ReactNotifications />
       <Navbar />
       <Routes>
+     
+      {/* <Route path="/back" element={<Background />} /> */}
         <Route path="/register-modal" element={<RegisterModal />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/categories/:id" element={<Category />} />
@@ -51,8 +55,9 @@ function App() {
         <Route path="/relaxroom" element={<Room />} />
         <Route path="/chicagoartmuseum" element={<RoomChicago />} />
         <Route path="/clevelendartmuseum" element={<RoomClevelend />} />
-        <Route path="/harvardartmuseum" element={<RoomHarvard />} />
-        
+        <Route path="/russianmuseum" element={<RussianGalery />} />
+        <Route path="/londongallery" element={<LondonGalery />} />
+
         <Route element={<ProtectedRoute />}>
           <Route path="/profile-settings" element={<ProfileSettings />} />
           <Route path="/profile" element={<Profile />} />

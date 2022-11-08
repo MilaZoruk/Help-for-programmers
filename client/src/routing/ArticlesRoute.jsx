@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import AddArticle from '../components/Category/AddArticle';
+import AddArticle from '../components/Articles/Category/AddArticle';
 
 const ArticlesRoute = () => {
   const navigate = useNavigate('/');

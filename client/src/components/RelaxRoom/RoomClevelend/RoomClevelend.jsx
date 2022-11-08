@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player'
+import { SyncLoader } from 'react-spinners';
 import styles from './RoomClevelend.module.css';
 
 export default function RoomClevelend() {
   const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true);
   const [items, setItems] = useState([]);
   //   const [image, setImage] = useState('');
 
@@ -19,9 +20,13 @@ export default function RoomClevelend() {
           },
         }
       );
+
       const result = await resp.json();
+
+      const filteResult = result.data.filter((el) => el.title !== 'Gray and Gold' && el.title !=='A Woman\'s Work' && el.title !== 'La Vie') 
       console.log(result);
-      setItems(result.data);
+      setItems(filteResult);
+      setIsLoaded(false);
       // setImage(result.config);
     }
     getBook();
@@ -31,7 +36,16 @@ export default function RoomClevelend() {
     return <div>Error: {error.message}</div>;
   }
   if (isLoaded) {
-    return <div>Loading...</div>;
+    return <div><SyncLoader
+    color="rgb(104, 117, 245)"
+    loading={isLoaded}
+    cssOverride={ {display: "block",
+    marginTop: "30px",
+    borderColor: "red",}}
+    size={10}
+    aria-label="Loading Spinner"
+    data-testid="loader"
+  /></div>;
   }
   return (
     <><div className={styles.playerwrapper}>
@@ -45,7 +59,7 @@ export default function RoomClevelend() {
       <div className={styles.allArt}>
       {items.map((el) => (
           <>
-          <img
+          <img key={el.id}
           className={styles.imgARt}
           src={el?.images?.web?.url} alt={el.title} />
           <br></br>
