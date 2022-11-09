@@ -8,7 +8,7 @@ export default function RussianGalery() {
         width="100%"
         height="100%"
         id=""
-        className=""
+        className="rusMuz"
         display="block"
         position="relative"
         allow="fullscreen"/>

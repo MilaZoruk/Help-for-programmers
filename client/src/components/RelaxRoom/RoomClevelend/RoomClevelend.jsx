@@ -24,10 +24,8 @@ export default function RoomClevelend() {
       const result = await resp.json();
 
       const filteResult = result.data.filter((el) => el.title !== 'Gray and Gold' && el.title !=='A Woman\'s Work' && el.title !== 'La Vie') 
-      console.log(result);
       setItems(filteResult);
       setIsLoaded(false);
-      // setImage(result.config);
     }
     getBook();
   }, []);

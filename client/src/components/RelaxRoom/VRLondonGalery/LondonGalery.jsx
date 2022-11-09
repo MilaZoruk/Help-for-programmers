@@ -8,7 +8,7 @@ export default function LondonGalery() {
         width="100%"
         height="100%"
         id=""
-        className=""
+        className="galLondon"
         display="block"
         position="relative"
         allow="fullscreen"/>
