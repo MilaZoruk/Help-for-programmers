@@ -61,7 +61,7 @@ export const categories = [
   {
     id: 8,
     name: "Статьи",
-    description: "Что почитать прогрFаммисту?",
+    description: "Что почитать программисту?",
     imageSrc: whatToRead,
     imageAlt: "Сегодня прекрасный день!",
   },
