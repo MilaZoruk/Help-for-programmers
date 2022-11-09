@@ -21,8 +21,8 @@ export default function RoomChicago() {
         }
       );
       const result = await resp.json();
-      console.log(result);
-      setItems(result.data);
+      const filteResult = result.data.filter((el) => el.title !== 'GAF View-Master' && el.title !=='Kenmore Sewing Machine') 
+      setItems(filteResult);
       setImage(result.config);
       setIsLoaded(false);
     }

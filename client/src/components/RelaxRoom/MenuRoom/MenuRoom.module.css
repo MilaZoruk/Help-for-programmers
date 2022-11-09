@@ -1,3 +1,10 @@
+.flexBox{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:center;
+}
+
 .btn {
     position: relative;
     z-index: 1;
@@ -14,14 +21,31 @@
     justify-content:center;
 }
 
-.flexBox{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content:center;
-}
-
 .img{
     position: relative;
     z-index: 1;
+}
+
+@media (max-width: 890px) {
+
+    .flexBox{
+        display: flex;
+        flex-wrap: wrap;
+      
+    }
+
+    .btn {
+        position: relative;
+        z-index: 1;
+        /* background: #e8a87c; */
+        /*border-radius: 10px;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        margin-top: 50px; */
+        width: 80%;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content:center;
+    }
 }
