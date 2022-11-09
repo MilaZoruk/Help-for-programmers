@@ -109,6 +109,16 @@ export default function Navbar() {
                         >
                           Комната отдыха
                         </Link>
+                        <Link
+                          to="/danceman"
+                          className={({ isActive }) =>
+                            isActive
+                              ? "bg-gray-900 text-white rounded-md px-3 py-2 font-medium text-sm"
+                              : "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm"
+                          }
+                        >
+                          Потанцуем?
+                        </Link>
                       </div>
                     </div>
                   </div>

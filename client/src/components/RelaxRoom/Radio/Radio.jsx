@@ -24,9 +24,9 @@ export default function Radio() {
 
     const newStations = await api
       .searchStations({
-        language: "russia",
+        language: "english",
         tag: stf,
-        limit: 10,
+        limit: 15,
       })
       .then((data) => data);
 
