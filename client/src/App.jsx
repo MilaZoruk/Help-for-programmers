@@ -54,7 +54,7 @@ function App() {
         <Route path="" element={<Home />} />
 
         <Route path="/relaxroom" element={<Room />} />
-        <Route path="/dance" element={<Dance/>} />
+        <Route path="/danceman" element={<Dance/>} />
         <Route path="/chicagoartmuseum" element={<RoomChicago />} />
         <Route path="/clevelendartmuseum" element={<RoomClevelend />} />
         <Route path="/russianmuseum" element={<RussianGalery />} />
