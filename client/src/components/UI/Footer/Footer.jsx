@@ -5,7 +5,7 @@ import ITHelpersLogo from "../itHelpersLogo.png";
 export default function Footer() {
   return (
     <footer
-      className="w-full p-4 md:p-8 lg:p-10 bg-gray-800"
+      className="w-full p-4 md:p-8 lg:p-6 bg-gray-800"
       style={{ position: "relative" }}
     >
       <div className="mx-auto max-w-screen-xl text-center">
@@ -28,6 +28,9 @@ export default function Footer() {
           <li>
             <Link to="/relaxroom" className="mr-4 hover:underline md:mr-6 ">
               Комната отдыха
+            </Link>
+            <Link to="/relaxroom" className="mr-4 hover:underline md:mr-6 ">
+              Потанцуем?
             </Link>
           </li>
         </ul>

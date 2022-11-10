@@ -24,10 +24,8 @@ export default function RoomClevelend() {
       const result = await resp.json();
 
       const filteResult = result.data.filter((el) => el.title !== 'Gray and Gold' && el.title !=='A Woman\'s Work' && el.title !== 'La Vie') 
-      console.log(result);
       setItems(filteResult);
       setIsLoaded(false);
-      // setImage(result.config);
     }
     getBook();
   }, []);
@@ -50,9 +48,15 @@ export default function RoomClevelend() {
   return (
     <><div className={styles.playerwrapper}>
           <ReactPlayer
+          key=""
           className='react-player'
-          url={['https://www.youtube.com/watch?v=2pbH57GfmtA&t=1s', 'https://www.youtube.com/watch?v=o_wJueqWFc4', 'https://www.youtube.com/watch?v=AuPubReb76k']}
+          url={['https://www.youtube.com/watch?v=2pbH57GfmtA&t=1s', 'https://www.youtube.com/watch?v=o_wJueqWFc4', 'https://www.youtube.com/watch?v=AuPubReb76k', 'https://www.youtube.com/watch?v=b8hajPxqetk']}
           width='100%'
+          loop={true}
+          controls={true}
+          fs="1"
+          origin = 'http://localhost:3000'
+          onError={(e) => console.log('onError', e)}
         />
       </div>
 

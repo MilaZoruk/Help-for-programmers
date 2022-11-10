@@ -24,38 +24,42 @@ export default function Radio() {
 
     const newStations = await api
       .searchStations({
-        language: "russia",
+        language: "english",
         tag: stf,
-        limit: 4,
+        limit: 15,
       })
       .then((data) => data);
 
     return newStations;
   };
 
+  function FourRandom (num) {
+
+    let indexRadio=[];
+    let index = 0;
+
+    while (index < 4) {
+     let random = Math.floor(Math.random()*num);
+
+     if (indexRadio.includes(random)) continue
+      indexRadio.push(random)
+      index+=1
+    }
+    return indexRadio
+  }
+
   useEffect(() => {
     setupApi(stationFilter).then((data) => {
-      // const randomStation = data.filter((el) => FourRandom(20).includes())
-      setStations(data);
+      // console.log(' data', data);
+      const random = FourRandom(data.length);
+      const randomStations = data.filter((el, i) => random.includes(i));
+      // console.log('~ randomStations', randomStations)
+      setStations(randomStations);
+      setLoadingStations(false);
     });
-  }, [stationFilter]);
+  }, [stationFilter]); 
 
 
-  // function FourRandom (num) {
-
-  //   let indexRadio=[];
-  //   let index = 0;
-
-  //   while (index < 4) {
-  //    let random = Math.floor(Math.random()*num);
-
-  //    if (indexRadio.includes(random)) continue
-  //     indexRadio.push(random)
-  //     index+=1
-  //     console.log(indexRadio)
-  //   }
-  //   return indexRadio
-  // }
 
   const filters = [
     'hit',
