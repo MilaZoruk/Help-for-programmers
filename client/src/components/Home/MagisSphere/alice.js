@@ -1,13 +1,13 @@
 import { predictions } from "../../../constants/predictions";
 
 export function alice(inputString) {
-    const words = inputString.match(/[а-я]+/gim);//get words only
-    if (words[words.length - 1].length < 3) {
+    const words = inputString.match(/[а-я]+/gim).filter((el) => el.length >= 1);//get words only
+    if (words.length < 1) {
         return predictions[Math.floor(Math.random() * predictions.length)];
     }
     const candidates = [];//array of indexes of prediction matches to words
     for (let index = words.length - 1; index >= 0; index--) {//
-        words[index] = words[index].split('').slice(0, -1).join('');
+        if (index === words.length - 1) trimIt(words)
         predictions.forEach((item, i) => {
             if (item.includes(words[index])) candidates.push(i)
         })
