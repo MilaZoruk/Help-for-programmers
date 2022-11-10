@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
-import { CometChat } from '@cometchat-pro/chat';
-import { v4 as uuidv4 } from 'uuid';
-import { supabase } from '../supabase/supabaseClient';
-import { serializeUser } from '../utils/serializeUser';
-import { AUTH_KEY } from '../constants/COMET_CHAT';
+import { CometChat } from "@cometchat-pro/chat";
+import { v4 as uuidv4 } from "uuid";
+import { supabase } from "../supabase/supabaseClient";
+import { serializeUser } from "../utils/serializeUser";
+import { AUTH_KEY } from "../constants/COMET_CHAT";
 
 const STORAGE_URL = `${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/avatars`;
 
@@ -11,20 +11,37 @@ const STORAGE_URL = `${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/pub
 // объект, возвращаемый методом `auth.user`, извлекается из локального хранилища
 const get = async () => {
   const { data } = await supabase.auth.getSession();
+
   if (data.session) {
     const { data: _userData, error } = await supabase
-      .from('users')
+      .from("users")
       .select()
       .match({ id: data.session.user.id })
       .single();
-    if (error) throw error;
+
+    if (!_userData) {
+      const { data: newUser, error: _error } = await supabase
+        .from("users")
+        .insert([
+          {
+            id: data.session.user.id,
+            email: data.session.user.email,
+            avatar_url: data.session.user.user_metadata.avatar_url,
+            user_name: data.session.user.user_metadata.user_name,
+          },
+        ])
+        .single()
+        .select();
+
+      return newUser;
+    }
 
     CometChat.login(data.session.user.id, AUTH_KEY).then(
       (user) => {
-        console.log('Login Successful:', { user });
+        console.log("Login Successful:", { user });
       },
       (error) => {
-        console.log('Login failed with exception:', { error });
+        console.log("Login failed with exception:", { error });
       }
     );
 
@@ -44,7 +61,7 @@ const register = async (userData) => {
   if (error) throw error;
   // записываем пользователя в базу
   const { data: _user, error: _error } = await supabase
-    .from('users')
+    .from("users")
     // сериализуем объект пользователя
     .insert([serializeUser(data, userData)])
     .single()
@@ -57,10 +74,10 @@ const register = async (userData) => {
 
   CometChat.createUser(user, AUTH_KEY).then(
     (newUser) => {
-      console.log('user created', newUser);
+      console.log("user created", newUser);
     },
     (error) => {
-      console.log('error', error);
+      console.log("error", error);
     }
   );
 
@@ -78,7 +95,7 @@ const login = async (userInput) => {
   if (error) throw error;
   // получаем данные пользователя из базы
   const { data: _user, error: _error } = await supabase
-    .from('users')
+    .from("users")
     .select()
     .match({ id: data.user.id })
     .single();
@@ -86,10 +103,10 @@ const login = async (userInput) => {
 
   CometChat.login(data.session.user.id, AUTH_KEY).then(
     (user) => {
-      console.log('Login Successful:', { user });
+      console.log("Login Successful:", { user });
     },
     (error) => {
-      console.log('Login failed with exception:', { error });
+      console.log("Login failed with exception:", { error });
     }
   );
 
@@ -101,7 +118,7 @@ const logout = async () => {
   const { error } = await supabase.auth.signOut();
   if (error) throw error;
   CometChat.logout().then(() => {
-    console.log('Logout Successful');
+    console.log("Logout Successful");
   });
   return null;
 };
@@ -113,7 +130,7 @@ const update = async (newData) => {
   const { id } = data.session.user;
   if (!data) return;
   const { error } = await supabase
-    .from('users')
+    .from("users")
     .update(newData)
     .match({ id })
     .single();
@@ -129,12 +146,12 @@ const uploadAvatar = async (file) => {
   // извлекаем расширение из названия файла
   // метод `at` появился в `ECMAScript` в этом году
   // он позволяет простым способом извлекать элементы массива с конца
-  const fileExt = file.name.split('.').at(-1);
+  const fileExt = file.name.split(".").at(-1);
   // формируем название аватара
   const name = `${uuidv4()}.${fileExt}`;
   // загружаем файл в хранилище
   const { error: uploadError } = await supabase.storage
-    .from('avatars')
+    .from("avatars")
     .upload(name, file);
   // прописываем полный путь к аватару
   const fullAvatarPath = `${STORAGE_URL}/${name}`;
@@ -142,7 +159,7 @@ const uploadAvatar = async (file) => {
   // обновляем данные пользователя
   // записываем путь к аватару
   const { error: _error } = await supabase
-    .from('users')
+    .from("users")
     .update({ avatar_url: fullAvatarPath })
     .match({ id })
     .single();
