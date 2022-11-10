@@ -43,6 +43,7 @@ const Dance = () => {
             onPlay={e => console.log("onPlay")}
             showSkipControls={true}
             showJumpControls={false}
+            muted={true}
             header={`Просто нажми Play и двигайся с нашим прога-мэном: ${musicTracks[trackIndex].name}`}
             onClickPrevious={handleClickPrevious}
             onClickNext={handleClickNext}
