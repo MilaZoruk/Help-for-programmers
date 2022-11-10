@@ -1,5 +1,4 @@
 import { predictions } from "../../../constants/predictions";
-
 export function alice(inputString) {
     const words = inputString.match(/[а-я]+/gim);//get words only
     if (words[words.length - 1].length < 3) {
@@ -7,7 +6,7 @@ export function alice(inputString) {
     }
     const candidates = [];//array of indexes of prediction matches to words
     for (let index = words.length - 1; index >= 0; index--) {//
-        words[index] = words[index].split('').slice(0, -1).join('');
+        // words[index] = words[index].split('').slice(0, -1).join('');
         predictions.forEach((item, i) => {
             if (item.includes(words[index])) candidates.push(i)
         })
@@ -15,9 +14,7 @@ export function alice(inputString) {
     if (candidates.length === 0) {
         return alice(trimIt(words))
     } else {
-        const corellate = candidates.filter((el,i, arr)=>arr.indexOf(el)!==arr.lastIndexOf(el));
-        if (corellate.length) return predictions[corellate[0]];
-        return predictions[candidates[Math.floor(Math.random() * candidates.length)]];
+        return predictions[candidates[0]]
     }
 }
 
