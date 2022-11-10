@@ -1,0 +1,9 @@
+.playerwrapper{
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: 30px;
+    z-index: 5;
+    border: solid 10px;
+    border-color: white;
+    border-radius: 2%;
+}
