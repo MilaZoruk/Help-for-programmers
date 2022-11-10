@@ -54,6 +54,7 @@ function App() {
         <Route element={<SuperuserRoute />}>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Route>
+        
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
