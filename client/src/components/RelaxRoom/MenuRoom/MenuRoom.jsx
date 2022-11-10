@@ -33,7 +33,7 @@ const MenuRoom = () => (
       
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Посетить Чикагский институт искусств</h5>
         <p className="mb-3 font-bold text-gray-700 dark:text-gray-400">Чикагский институт искусств, основанный в 1879 году, является одним из крупнейших музеев мира,
-        в котором хранится необыкновенная коллекция предметов из разных стран, культур и времени.</p>
+        в котором хранится необыкновенная коллекция предметов из разных стран, культур и времен.</p>
         
         <button type="button" className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-gray-800 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         Перейти

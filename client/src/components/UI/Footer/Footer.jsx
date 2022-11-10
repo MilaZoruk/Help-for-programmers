@@ -29,7 +29,7 @@ export default function Footer() {
             <Link to="/relaxroom" className="mr-4 hover:underline md:mr-6 ">
               Комната отдыха
             </Link>
-            <Link to="/relaxroom" className="mr-4 hover:underline md:mr-6 ">
+            <Link to="/danceman" className="mr-4 hover:underline md:mr-6 ">
               Потанцуем?
             </Link>
           </li>
