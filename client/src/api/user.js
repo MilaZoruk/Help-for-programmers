@@ -8,7 +8,7 @@ import { AUTH_KEY } from "../constants/COMET_CHAT";
 const STORAGE_URL = `${process.env.REACT_APP_SUPABASE_URL}/storage/v1/object/public/avatars`;
 
 // метод для получения данных пользователя из базы при наличии аутентифицированного пользователя
-// объект, возвращаемый методом `auth.user`, извлекается из локального хранилища
+
 const get = async () => {
   const { data } = await supabase.auth.getSession();
 
@@ -33,12 +33,25 @@ const get = async () => {
         .single()
         .select();
 
+      const user = new CometChat.User(newUser.id);
+      user.setName(newUser.user_name);
+      user.setAvatar(newUser.avatar_url);
+
+      CometChat.createUser(user, AUTH_KEY).then(
+        () => {
+          console.log("user created");
+        },
+        (error) => {
+          console.log("error", error);
+        }
+      );
+
       return newUser;
     }
 
     CometChat.login(data.session.user.id, AUTH_KEY).then(
       (user) => {
-        console.log("Login Successful:", { user });
+        console.log("Login Successful:");
       },
       (error) => {
         console.log("Login failed with exception:", { error });
@@ -103,7 +116,7 @@ const login = async (userInput) => {
 
   CometChat.login(data.session.user.id, AUTH_KEY).then(
     (user) => {
-      console.log("Login Successful:", { user });
+      console.log("Login Successful:");
     },
     (error) => {
       console.log("Login failed with exception:", { error });
