@@ -7,6 +7,7 @@ import { registerUser } from "../../features/User/userActions";
 import { supabase } from "../../supabase/supabaseClient";
 
 import registerCat from "./registerCat.jpg";
+import { serializeUser } from "../../utils/serializeUser";
 
 export default function RegisterModal({ onClose, onRedirect }) {
   const notification = {
