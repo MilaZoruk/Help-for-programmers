@@ -49,13 +49,15 @@ export default function RoomChicago() {
 
     <><div className={styles.playerwrapper}>
         <ReactPlayer
+          key=""
           className='react-player'
           url={['https://www.youtube.com/watch?v=WtKHPUrk5q8', 'https://www.youtube.com/watch?v=t3lcMgWoKY4', 'https://www.youtube.com/watch?v=NFPs_cRRGdM', 'https://www.youtube.com/watch?v=cs75isUzAeg&feature=emb_logo']}
           width='100%'
-          loop="true"
-          controls="1"
+          loop={true}
+          controls={true}
           fs="1"
-          loading="lazy"
+          origin = 'http://localhost:3000' 
+          onError={(e) => console.log('onError', e)}
         />
       </div>
 
@@ -68,7 +70,7 @@ export default function RoomChicago() {
               alt={el.title}
             />
             <br></br>
-            <div className="space-y-2 mt-4 text-lg" key={el.id}>
+            <div className="space-y-2 mt-4 text-lg" key={el.image_id}>
             <p className={styles.wordDescription1}> Название:</p> <p className={styles.wordDescription}>{el.title}</p>
             <p className={styles.wordDescription1}>Место:</p> <p className={styles.wordDescription}>{el.place_of_origin}</p>
             <p className={styles.wordDescription1}>Период:</p> <p className={styles.wordDescription}>{el.date_start}-{el.date_end}</p>
