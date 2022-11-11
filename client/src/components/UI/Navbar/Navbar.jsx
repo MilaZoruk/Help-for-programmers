@@ -109,16 +109,6 @@ export default function Navbar() {
                         >
                           Комната отдыха
                         </Link>
-                        <Link
-                          to="/danceman"
-                          className={({ isActive }) =>
-                            isActive
-                              ? "bg-gray-900 text-white rounded-md px-3 py-2 font-medium text-sm"
-                              : "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm"
-                          }
-                        >
-                          Потанцуем?
-                        </Link>
                       </div>
                     </div>
                   </div>
@@ -263,18 +253,6 @@ export default function Navbar() {
                       Комната отдыха
                     </Disclosure.Button>
                   </Link>
-                  <Link to="/danceman">
-                    <Disclosure.Button
-                      as="button"
-                      className={({ isActive }) =>
-                        isActive
-                          ? "block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
-                          : "block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                      }
-                    >
-                      Потанцуем?
-                    </Disclosure.Button>
-                  </Link>
                 </div>
                 {userInfo ? (
                   <div className="border-t border-gray-700 pt-4 pb-3">
@@ -335,12 +313,14 @@ export default function Navbar() {
                   <>
                     <Disclosure.Button
                       as="button"
+                      onClick={() => setIsLoginModalOpen(true)}
                       className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                     >
                       Войти
                     </Disclosure.Button>
                     <Disclosure.Button
                       as="button"
+                      onClick={() => setIsRegisterModalOpen(true)}
                       className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                     >
                       Зарегистрироваться

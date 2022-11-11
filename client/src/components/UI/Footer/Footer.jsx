@@ -29,9 +29,6 @@ export default function Footer() {
             <Link to="/relaxroom" className="mr-4 hover:underline md:mr-6 ">
               Комната отдыха
             </Link>
-            <Link to="/danceman" className="mr-4 hover:underline md:mr-6 ">
-              Потанцуем?
-            </Link>
           </li>
         </ul>
         <span className="text-sm sm:text-center text-gray-400">

@@ -55,7 +55,7 @@ export default function RoomClevelend() {
           loop={true}
           controls={true}
           fs="1"
-          origin = 'http://localhost:3000'
+          // origin = 'http://localhost:3000'
           onError={(e) => console.log('onError', e)}
         />
       </div>
