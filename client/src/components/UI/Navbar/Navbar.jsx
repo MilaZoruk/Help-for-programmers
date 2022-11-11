@@ -313,12 +313,14 @@ export default function Navbar() {
                   <>
                     <Disclosure.Button
                       as="button"
+                      onClick={() => setIsLoginModalOpen(true)}
                       className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                     >
                       Войти
                     </Disclosure.Button>
                     <Disclosure.Button
                       as="button"
+                      onClick={() => setIsRegisterModalOpen(true)}
                       className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                     >
                       Зарегистрироваться

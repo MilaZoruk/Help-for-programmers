@@ -13,11 +13,12 @@ export default function Room() {
           className='react-player'
           url={['https://www.youtube.com/watch?v=i4ompLBhUg4', 'https://www.youtube.com/watch?v=HcugGy1Y3eI']}
           loop={true}
-          playing={true}
+          controls={true}
           fs="1"
-          origin = 'http://localhost:3000'
           onError={(e) => console.log('onError', e)}
-          onPlay
+          // playing={true}
+          // origin = 'http://localhost:3000'
+          // onPlay
         />
       </div>
       <MenuRoom />
