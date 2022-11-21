@@ -16,7 +16,7 @@ https://it-helper.pro
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/MilaZoruk/IT-HELPER.PRO/blob/main/demo.gif)
 
 
 ## Главная страница
