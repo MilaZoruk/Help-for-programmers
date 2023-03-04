@@ -4,7 +4,8 @@
 Наш сайт помогает отвлечься от кода, переключить внимание и получить
 психологическую разгрузку.
 
-https://it-helper.pro
+[деплой](https://it-helper-7d601.web.app/)
+[сайт](https://it-helper.pro)
 
 
 ## Tech Stack
